@@ -1,4 +1,4 @@
-import 'package:anime_app/screens/details/details_sceen.dart';
+import 'package:anime_app/screens/details/details.dart';
 import 'package:anime_app/screens/home/widgets/home_widgets.dart';
 import 'package:anime_app/widgets/carosal_container.dart';
 import 'package:flutter/material.dart';

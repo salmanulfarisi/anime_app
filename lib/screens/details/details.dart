@@ -1,7 +1,12 @@
+import 'package:anime_app/screens/details/widgets/details_widget.dart';
+import 'package:anime_app/screens/details/widgets/detil_buttons.dart';
+import 'package:anime_app/utils/const.dart';
 import 'package:anime_app/widgets/widget_conts.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:readmore/readmore.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -13,47 +18,25 @@ class DetailsScreen extends StatefulWidget {
 }
 
 class _DetailsScreenState extends State<DetailsScreen> {
-  final _pageController = PageController();
   int currentpos = 0;
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      body: Stack(
-        children: [
-          Column(
-            children: [
-              Container(
-                height: size.height * 0.25,
-                width: double.infinity,
-                decoration: const BoxDecoration(
-                  color: Colors.grey,
-                ),
-              ),
-            ],
-          ),
-          SafeArea(
-            child: IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: const Icon(
-                Icons.arrow_back,
-                color: Colors.white,
-              ),
-            ),
-          ),
-          Positioned(
-            top: size.height * 0.15,
+      appBar: AppBar(),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(children: [
                   Column(
                     children: [
-                      Container(
+                      SizedBox(
                           height: size.height * 0.30,
                           width: size.width * 0.60,
-                          decoration: const BoxDecoration(),
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 10, vertical: 10),
@@ -100,12 +83,10 @@ class _DetailsScreenState extends State<DetailsScreen> {
                       )
                     ],
                   ),
-                  20.widthBox,
+                  50.widthBox,
                   Column(
                     children: [
                       Container(
-                        height: size.height * 0.30,
-                        width: size.width * 0.35,
                         decoration: const BoxDecoration(
                           color: Colors.transparent,
                           borderRadius: BorderRadius.only(
@@ -119,7 +100,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                             10.heightBox,
                             "Score"
                                 .text
-                                .black
+                                .white
                                 .fontWeight(FontWeight.w500)
                                 .make(),
                             rowIconsText(
@@ -127,7 +108,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                               size: 24.0,
                               text: "8.5"
                                   .text
-                                  .black
+                                  .white
                                   .size(32)
                                   .fontWeight(FontWeight.bold)
                                   .make(),
@@ -189,69 +170,99 @@ class _DetailsScreenState extends State<DetailsScreen> {
                 ]),
                 20.heightBox,
                 Container(
-                  height: size.height * 0.20,
+                  height: size.height * 0.15,
                   width: size.width,
                   decoration: const BoxDecoration(
                     color: Colors.transparent,
                   ),
-                  child: Stack(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Positioned(
-                        top: size.height * 0.05,
-                        left: size.width * 0.10,
-                        right: size.width * 0.10,
-                        child: Container(
-                            width: size.width * 10,
-                            height: size.height * 0.10,
-                            decoration: BoxDecoration(
-                                color: Colors.greenAccent,
-                                borderRadius: BorderRadius.circular(10)),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const Icon(
-                                  LineIcons.play,
-                                  color: Colors.white,
-                                  size: 34,
-                                ),
-                                "Watch Now"
-                                    .text
-                                    .white
-                                    .size(18)
-                                    .fontWeight(FontWeight.bold)
-                                    .make()
-                              ],
-                            )),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          detailButton(
+                              context: context,
+                              texts: "Watch Now",
+                              icon: CupertinoIcons.play_arrow_solid),
+                          20.widthBox,
+                          detailButton(
+                              context: context,
+                              texts: "Add to Watchlist",
+                              icon: CupertinoIcons.plus_circle),
+                        ],
                       ),
-                      Positioned(
-                        top: size.height * 0.10,
-                        child: Stack(
-                          children: [
-                            Image.asset(
-                              "assets/images/loffyshare.png",
-                              height: size.height * 0.10,
-                            ),
-                            15.widthBox,
-                            Positioned(
-                              top: size.height * 0.05,
-                              right: 0,
-                              child: 'Share our\n app'
-                                  .text
-                                  .color(Colors.green)
-                                  .align(TextAlign.center)
-                                  .bold
-                                  .make(),
-                            )
-                          ],
-                        ),
+                      Row(
+                        children: [
+                          Image.asset(
+                            "assets/images/loffyshare.png",
+                            height: size.height * 0.10,
+                          ),
+                          'Share our\n app'
+                              .text
+                              .color(Colors.green)
+                              .align(TextAlign.center)
+                              .bold
+                              .make(),
+                        ],
                       ),
                     ],
                   ),
                 ),
+                10.heightBox,
+                'Overview'
+                    .text
+                    .white
+                    .size(18)
+                    .fontWeight(FontWeight.bold)
+                    .make(),
+                10.heightBox,
+                const ReadMoreText(
+                  detailsTitle,
+                  trimLines: 5,
+                  colorClickableText: Colors.blue,
+                  trimMode: TrimMode.Line,
+                  trimCollapsedText: 'Show more',
+                  trimExpandedText: ' Show less',
+                  style: TextStyle(fontSize: 14, color: Colors.white),
+                  moreStyle:
+                      TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                ),
+                10.heightBox,
+                rowText(title: 'Japanese :', subtitle: 'One Piece'),
+                rowText(title: 'Synonyms :', subtitle: 'OP'),
+                rowText(title: 'Rating :', subtitle: 'R'),
+                rowText(title: 'Studios :', subtitle: 'Toei Animation'),
+                rowText(
+                    title: 'Genres :', subtitle: 'Action, Adventure, Comedy'),
+                rowText(title: 'Total Episodes :', subtitle: 'Unknown'),
+                rowText(title: 'Aired :', subtitle: 'Oct 20, 1999 to ?'),
+                rowText(title: 'Producers :', subtitle: 'Fuji TV'),
+                rowText(title: 'Licensors :', subtitle: 'Funimation'),
+                rowText(title: 'Source :', subtitle: 'Manga'),
+                10.heightBox,
+                'Caracters&voice actors'
+                    .text
+                    .white
+                    .size(18)
+                    .fontWeight(FontWeight.bold)
+                    .make(),
+                10.heightBox,
+                ListView.separated(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    return castContainer();
+                  },
+                  separatorBuilder: (context, index) {
+                    return 10.heightBox;
+                  },
+                  itemCount: 5,
+                ),
               ],
             ),
           ),
-        ],
+        ),
       ),
     );
   }
