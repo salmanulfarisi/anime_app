@@ -3,7 +3,7 @@ import 'package:anime_app/screens/cast/cast_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-Widget castContainer({context}) {
+Widget actingRolesContainer({context}) {
   return Container(
     height: 100,
     padding: const EdgeInsets.all(12),
@@ -15,10 +15,14 @@ Widget castContainer({context}) {
       children: [
         Row(
           children: [
-            const CircleAvatar(
-              radius: 20,
-              backgroundImage: AssetImage('assets/images/loffyshare.png'),
-            ),
+            ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Image.asset(
+                  'assets/images/loffyshare.png',
+                  height: 50,
+                  width: 50,
+                  fit: BoxFit.cover,
+                )),
             10.widthBox,
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -40,6 +44,7 @@ Widget castContainer({context}) {
         ),
         const Spacer(),
         Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -52,9 +57,9 @@ Widget castContainer({context}) {
                         MaterialPageRoute(
                             builder: (context) => const VoiceActorScreen()));
                   },
-                  child: 'Tanaka, Mayumi'.text.white.make(),
+                  child: 'Mother Nanba'.text.white.make(),
                 ),
-                'Japanese'.text.white.make(),
+                'Supporting'.text.white.make(),
               ],
             ),
             10.widthBox,
