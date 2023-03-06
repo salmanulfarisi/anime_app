@@ -1,7 +1,8 @@
+import 'package:anime_app/screens/cast/cast_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-Widget castContainer() {
+Widget castContainer({context}) {
   return Container(
     height: 100,
     padding: const EdgeInsets.all(12),
@@ -21,7 +22,15 @@ Widget castContainer() {
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                'Monkey D. Luffy'.text.white.make(),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const CastScreen()));
+                  },
+                  child: 'Monkey D. Luffy'.text.white.make(),
+                ),
                 'Main Character'.text.white.make(),
               ],
             )

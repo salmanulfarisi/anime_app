@@ -252,7 +252,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   itemBuilder: (context, index) {
-                    return castContainer();
+                    return castContainer(context: context);
                   },
                   separatorBuilder: (context, index) {
                     return 10.heightBox;
