@@ -14,12 +14,12 @@ class FireStoreServices {
         .snapshots();
   }
 
-  // get character collection
-  static getCharacter() {
+  // get charector subcollection
+  static getCharector(animeId) {
     return firestore
         .collection(animeCollection)
-        .doc()
-        .collection(characterCollection).where('')
+        .doc(animeId)
+        .collection(characterCollection)
         .snapshots();
   }
 }

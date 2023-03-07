@@ -47,6 +47,8 @@ class HomeScreen extends StatelessWidget {
                         physics: const BouncingScrollPhysics(),
                         itemCount: data.length, // number of items in the list
                         itemBuilder: (BuildContext context, int index) {
+                          var docId = snapshot.data!.docs[index].id;
+
                           return GestureDetector(
                             onTap: () {
                               Navigator.push(
@@ -54,6 +56,7 @@ class HomeScreen extends StatelessWidget {
                                   MaterialPageRoute(
                                       builder: (context) => DetailsScreen(
                                             data: data[index],
+                                            id: docId,
                                           )));
                             },
                             child: topAnime(

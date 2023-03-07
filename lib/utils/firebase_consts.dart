@@ -7,4 +7,4 @@ User? currentUser = auth.currentUser;
 
 // collections
 const animeCollection = 'anime';
-const characterCollection = 'character & actors';
+const characterCollection = 'charactor';

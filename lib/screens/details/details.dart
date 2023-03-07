@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:anime_app/screens/cast/actor_screen.dart';
+import 'package:anime_app/screens/cast/all_char_act_screen.dart';
 import 'package:anime_app/screens/details/widgets/details_widget.dart';
 import 'package:anime_app/screens/details/widgets/detil_buttons.dart';
 import 'package:anime_app/widgets/widget_conts.dart';
@@ -14,7 +14,8 @@ import 'package:velocity_x/velocity_x.dart';
 
 class DetailsScreen extends StatefulWidget {
   final dynamic data;
-  const DetailsScreen({Key? key, this.data}) : super(key: key);
+  final dynamic id;
+  const DetailsScreen({Key? key, this.data, this.id}) : super(key: key);
 
   @override
   State<DetailsScreen> createState() => _DetailsScreenState();
@@ -281,13 +282,56 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   itemBuilder: (context, index) {
                     return castContainer(
                       context: context,
-                      charOnpress: () {},
+                      charOnpress: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            return dialogueBox(
+                              context: context,
+                              title:
+                                  "${widget.data['characters&actors'][index]['char_name']}",
+                              content:
+                                  "To Know More About ${widget.data['characters&actors'][index]['char_name']} Go to the Charector Page",
+                              onpress: () {
+                                print(widget.data['charaters'].toString());
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => AllCast(
+                                      data: widget.data['charaters'],
+                                      actData: widget.data['actors'],
+                                    ),
+                                  ),
+                                );
+                              },
+                            );
+                          },
+                        );
+                      },
                       actorOnpress: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    const VoiceActorScreen()));
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            return dialogueBox(
+                              context: context,
+                              title:
+                                  "${widget.data['characters&actors'][index]['act_name']}",
+                              content:
+                                  "To Know More About ${widget.data['characters&actors'][index]['act_name']} Go to the Cast Page",
+                              onpress: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => AllCast(
+                                      data: widget.data['charaters'],
+                                      actData: widget.data['actors'],
+                                    ),
+                                  ),
+                                );
+                              },
+                            );
+                          },
+                        );
                       },
                       charectorName:
                           "${widget.data['characters&actors'][index]['char_name']}",
