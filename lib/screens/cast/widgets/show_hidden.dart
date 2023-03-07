@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class ShowHideButton extends StatefulWidget {
   final String text;
@@ -16,10 +17,7 @@ class _ShowHideButtonState extends State<ShowHideButton> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        if (_showText)
-          Text(
-            widget.text,
-          ),
+        if (_showText) widget.text.text.white.size(14).make(),
         ElevatedButton(
           onPressed: () {
             setState(() {

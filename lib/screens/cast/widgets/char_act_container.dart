@@ -4,6 +4,7 @@ import 'package:velocity_x/velocity_x.dart';
 Widget charActContainer(
     {required String img, required String name, required String role}) {
   return Container(
+    padding: const EdgeInsets.all(8),
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(10),
       image: DecorationImage(
