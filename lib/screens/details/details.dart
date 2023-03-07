@@ -1,6 +1,8 @@
+import 'dart:developer';
+
+import 'package:anime_app/screens/cast/actor_screen.dart';
 import 'package:anime_app/screens/details/widgets/details_widget.dart';
 import 'package:anime_app/screens/details/widgets/detil_buttons.dart';
-import 'package:anime_app/utils/const.dart';
 import 'package:anime_app/widgets/widget_conts.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
@@ -11,7 +13,8 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class DetailsScreen extends StatefulWidget {
-  const DetailsScreen({Key? key}) : super(key: key);
+  final dynamic data;
+  const DetailsScreen({Key? key, this.data}) : super(key: key);
 
   @override
   State<DetailsScreen> createState() => _DetailsScreenState();
@@ -19,6 +22,15 @@ class DetailsScreen extends StatefulWidget {
 
 class _DetailsScreenState extends State<DetailsScreen> {
   int currentpos = 0;
+  // get docId
+  String get docId => widget.data.id;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    log(docId);
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -41,18 +53,17 @@ class _DetailsScreenState extends State<DetailsScreen> {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 10, vertical: 10),
                             child: CarouselSlider.builder(
-                              itemCount: 10,
+                              itemCount: widget.data['posterImg'].length,
                               itemBuilder: (context, index, realIndex) {
                                 return Container(
                                   width: size.width * 0.60,
                                   height: size.height * 0.30,
                                   decoration: BoxDecoration(
-                                    color: index.isEven
-                                        ? Colors.white
-                                        : Colors.red,
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: "$index".text.black.make(),
+                                      image: DecorationImage(
+                                    image: NetworkImage(
+                                        "${widget.data['posterImg'][index]}"),
+                                    fit: BoxFit.cover,
+                                  )),
                                 );
                               },
                               options: CarouselOptions(
@@ -72,7 +83,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                       20.heightBox,
                       AnimatedSmoothIndicator(
                         activeIndex: currentpos,
-                        count: 10,
+                        count: widget.data['posterImg'].length,
                         effect: const ExpandingDotsEffect(
                           activeDotColor: Color(0xff06c149),
                           dotHeight: 6,
@@ -106,10 +117,10 @@ class _DetailsScreenState extends State<DetailsScreen> {
                             rowIconsText(
                               icon: Icons.star_rounded,
                               size: 24.0,
-                              text: "8.5"
+                              text: "${widget.data['score']}"
                                   .text
                                   .white
-                                  .size(32)
+                                  .size(26)
                                   .fontWeight(FontWeight.bold)
                                   .make(),
                             ),
@@ -123,7 +134,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                               icon: LineIcons.hashtag,
                               color: Colors.blueGrey,
                               size: 24.0,
-                              text: "1999"
+                              text: "${widget.data['rank']}"
                                   .text
                                   .white
                                   .size(18)
@@ -141,7 +152,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                               icon: LineIcons.hashtag,
                               color: Colors.blueGrey,
                               size: 24.0,
-                              text: "1999"
+                              text: "${widget.data['popularity']}"
                                   .text
                                   .white
                                   .size(18)
@@ -155,7 +166,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                 .white
                                 .fontWeight(FontWeight.w500)
                                 .make(),
-                            "Airing"
+                            "${widget.data['status']}"
                                 .text
                                 .white
                                 .size(18)
@@ -217,31 +228,47 @@ class _DetailsScreenState extends State<DetailsScreen> {
                     .fontWeight(FontWeight.bold)
                     .make(),
                 10.heightBox,
-                const ReadMoreText(
-                  detailsTitle,
+                ReadMoreText(
+                  '${widget.data['overview']}',
                   trimLines: 5,
                   colorClickableText: Colors.blue,
                   trimMode: TrimMode.Line,
                   trimCollapsedText: 'Show more',
                   trimExpandedText: ' Show less',
-                  style: TextStyle(fontSize: 14, color: Colors.white),
-                  moreStyle:
-                      TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontSize: 14, color: Colors.white),
+                  moreStyle: const TextStyle(
+                      fontSize: 14, fontWeight: FontWeight.bold),
                 ),
                 10.heightBox,
-                rowText(title: 'Japanese :', subtitle: 'One Piece'),
-                rowText(title: 'Synonyms :', subtitle: 'OP'),
-                rowText(title: 'Rating :', subtitle: 'R'),
-                rowText(title: 'Studios :', subtitle: 'Toei Animation'),
+                rowText(
+                    title: 'Japanese :',
+                    subtitle: '${widget.data['japanese']}'),
+                rowText(
+                    title: 'Synonyms :',
+                    subtitle: '${widget.data['synonyms']}'),
+                rowText(
+                    title: 'Rating :', subtitle: '${widget.data['rating']}'),
+                rowText(
+                    title: 'Studios :', subtitle: '${widget.data['studios']}'),
                 rowText(
                     title: 'Genres :', subtitle: 'Action, Adventure, Comedy'),
-                rowText(title: 'Total Episodes :', subtitle: 'Unknown'),
-                rowText(title: 'Aired :', subtitle: 'Oct 20, 1999 to ?'),
-                rowText(title: 'Producers :', subtitle: 'Fuji TV'),
-                rowText(title: 'Licensors :', subtitle: 'Funimation'),
-                rowText(title: 'Source :', subtitle: 'Manga'),
+                rowText(
+                    title: 'Total Episodes :',
+                    subtitle: '${widget.data['total_episodes'] ?? '?'}'),
+                rowText(
+                    title: 'Aired :',
+                    subtitle:
+                        '${widget.data['aired']['from']} to ${widget.data['aired']['to'] ?? '?'}'),
+                rowText(
+                    title: 'Producers :',
+                    subtitle: '${widget.data['producers']}'),
+                // rowText(
+                //     title: 'Licensors :',
+                //     subtitle: '${widget.data['Licensors']}'),
+                // rowText(
+                //     title: 'Source :', subtitle: '${widget.data['source']}'),
                 10.heightBox,
-                'Caracters&voice actors'
+                'characters & voice actors'
                     .text
                     .white
                     .size(18)
@@ -252,13 +279,35 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   itemBuilder: (context, index) {
-                    return castContainer(context: context);
+                    return castContainer(
+                      context: context,
+                      charOnpress: () {},
+                      actorOnpress: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const VoiceActorScreen()));
+                      },
+                      charectorName:
+                          "${widget.data['characters&actors'][index]['char_name']}",
+                      role:
+                          "${widget.data['characters&actors'][index]['char_role']}",
+                      actor:
+                          "${widget.data['characters&actors'][index]['act_name']}",
+                      place:
+                          "${widget.data['characters&actors'][index]['act_place']}",
+                      actorImg:
+                          "${widget.data['characters&actors'][index]['actImg']}",
+                      charImg:
+                          "${widget.data['characters&actors'][index]['charImg']}",
+                    );
                   },
                   separatorBuilder: (context, index) {
                     return 10.heightBox;
                   },
-                  itemCount: 5,
-                ),
+                  itemCount: widget.data['characters&actors'].length,
+                )
               ],
             ),
           ),

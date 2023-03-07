@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class CastScreen extends StatelessWidget {
-  const CastScreen({Key? key}) : super(key: key);
+  final dynamic data;
+  final int index;
+  const CastScreen({Key? key, this.data, required this.index})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +25,9 @@ class CastScreen extends StatelessWidget {
                     backgroundImage: AssetImage('assets/images/loffyshare.png'),
                   ),
                   20.heightBox,
-                  'Monkey D. Luffy'.text.white.xl4.make(),
+                  '${data['char_name']}'.text.white.xl4.make(),
                   10.heightBox,
-                  'Main Character'.text.white.xl2.make(),
+                  '${data['abouot'][index]['jap_name)']}'.text.white.xl2.make(),
                   20.heightBox,
                   TabBar(
                     indicatorColor: Colors.green,

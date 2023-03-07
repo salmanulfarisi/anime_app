@@ -1,9 +1,17 @@
-import 'package:anime_app/screens/cast/actor_screen.dart';
-import 'package:anime_app/screens/cast/cast_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-Widget castContainer({context}) {
+Widget castContainer({
+  context,
+  required String charectorName,
+  required String role,
+  required String actor,
+  required String place,
+  required String charImg,
+  required String actorImg,
+  Function()? charOnpress,
+  actorOnpress,
+}) {
   return Container(
     height: 100,
     padding: const EdgeInsets.all(12),
@@ -15,9 +23,9 @@ Widget castContainer({context}) {
       children: [
         Row(
           children: [
-            const CircleAvatar(
+            CircleAvatar(
               radius: 20,
-              backgroundImage: AssetImage('assets/images/loffyshare.png'),
+              backgroundImage: NetworkImage(charImg),
             ),
             10.widthBox,
             Column(
@@ -25,15 +33,16 @@ Widget castContainer({context}) {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const CastScreen()));
-                  },
-                  child: 'Monkey D. Luffy'.text.white.make(),
+                  onTap: charOnpress,
+                  // onTap: () {
+                  //   // Navigator.push(
+                  //   //     context,
+                  //   //     MaterialPageRoute(
+                  //   //         builder: (context) => const CastScreen()));
+                  // },
+                  child: charectorName.text.white.make(),
                 ),
-                'Main Character'.text.white.make(),
+                role.text.white.make(),
               ],
             )
           ],
@@ -46,21 +55,22 @@ Widget castContainer({context}) {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const VoiceActorScreen()));
-                  },
-                  child: 'Tanaka, Mayumi'.text.white.make(),
+                  onTap: actorOnpress,
+                  // onTap: () {
+                  //   Navigator.push(
+                  //       context,
+                  //       MaterialPageRoute(
+                  //           builder: (context) => const VoiceActorScreen()));
+                  // },
+                  child: actor.text.white.make(),
                 ),
-                'Japanese'.text.white.make(),
+                place.text.white.make(),
               ],
             ),
             10.widthBox,
-            const CircleAvatar(
+            CircleAvatar(
               radius: 20,
-              backgroundImage: AssetImage('assets/images/loffyshare.png'),
+              backgroundImage: NetworkImage(actorImg),
             ),
           ],
         ),

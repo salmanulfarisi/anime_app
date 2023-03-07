@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "795223605220",
+    "project_id": "anime-app-d8bd7",
+    "storage_bucket": "anime-app-d8bd7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:795223605220:android:fa3fb926bf44435bced1f1",
+        "android_client_info": {
+          "package_name": "com.salman.anime_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "795223605220-girnhkidahm3fhnnjdcahfnd1nehpngk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.salman.anime_app",
+            "certificate_hash": "530dd4b77c04d0321effbd98c6743d7649c721bb"
+          }
+        },
+        {
+          "client_id": "795223605220-4kjfr9emjhciif6v5alj7m4hr3d4s4vs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClzRcRq3Eh5Dsi58Hsww1Fn8TXO6Sg7OQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "795223605220-4kjfr9emjhciif6v5alj7m4hr3d4s4vs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

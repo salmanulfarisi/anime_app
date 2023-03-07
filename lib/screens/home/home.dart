@@ -1,6 +1,8 @@
 import 'package:anime_app/screens/details/details.dart';
 import 'package:anime_app/screens/home/widgets/home_widgets.dart';
+import 'package:anime_app/services/firestore_services.dart';
 import 'package:anime_app/widgets/carosal_container.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -31,23 +33,41 @@ class HomeScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: SizedBox(
                 height: 200, // fixed height of the horizontal list
-                child: ListView.separated(
-                  scrollDirection: Axis.horizontal,
-                  physics: const BouncingScrollPhysics(),
-                  itemCount: 10, // number of items in the list
-                  itemBuilder: (BuildContext context, int index) {
-                    return GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const DetailsScreen()));
-                      },
-                      child: topAnime(context: context),
-                    );
-                  },
-                  separatorBuilder: (BuildContext context, int index) {
-                    return 10.widthBox;
+                child: StreamBuilder(
+                  stream: FireStoreServices.getTrendingAnime(),
+                  builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                    if (!snapshot.hasData) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    } else {
+                      var data = snapshot.data!.docs;
+                      return ListView.separated(
+                        scrollDirection: Axis.horizontal,
+                        physics: const BouncingScrollPhysics(),
+                        itemCount: data.length, // number of items in the list
+                        itemBuilder: (BuildContext context, int index) {
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => DetailsScreen(
+                                            data: data[index],
+                                          )));
+                            },
+                            child: topAnime(
+                                context: context,
+                                index: "0${index + 1}",
+                                animeName: data[index]['animeName'],
+                                animeImage: data[index]['posterImg'][0]),
+                          );
+                        },
+                        separatorBuilder: (BuildContext context, int index) {
+                          return 10.widthBox;
+                        },
+                      );
+                    }
                   },
                 ),
               ),

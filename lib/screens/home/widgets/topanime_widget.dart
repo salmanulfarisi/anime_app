@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-Widget topAnime({context}) {
+Widget topAnime(
+    {context, required String animeName, required String animeImage, index}) {
   final size = MediaQuery.of(context).size;
   return Container(
     child: Row(
@@ -27,8 +28,7 @@ Widget topAnime({context}) {
                 const Spacer(),
                 RotatedBox(
                   quarterTurns: 3, // rotate the text by 90 degrees clockwise
-                  child: 'Vertical Text'
-                      .text
+                  child: animeName.text
                       .fontWeight(FontWeight.normal)
                       .size(18)
                       .overflow(TextOverflow.ellipsis)
@@ -36,7 +36,7 @@ Widget topAnime({context}) {
                       .make(),
                 ),
                 const Spacer(),
-                '01'
+                '$index'
                     .text
                     .color(Colors.green)
                     .fontWeight(FontWeight.bold)
@@ -48,15 +48,15 @@ Widget topAnime({context}) {
         ),
         Container(
           width: size.width * 0.4,
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
               color: Colors.green,
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                 topRight: Radius.circular(10),
                 bottomRight: Radius.circular(10),
               ),
               image: DecorationImage(
                 fit: BoxFit.cover,
-                image: AssetImage('assets/images/welcome_background.png'),
+                image: NetworkImage(animeImage),
               )),
         ),
       ],
