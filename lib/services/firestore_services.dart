@@ -14,6 +14,14 @@ class FireStoreServices {
         .snapshots();
   }
 
+  // get spotlight anime
+  static getSpotlightAnime() {
+    return firestore
+        .collection(animeCollection)
+        .where('isSpotlight', isEqualTo: true)
+        .snapshots();
+  }
+
   // get charector subcollection
   static getCharector(animeId) {
     return firestore

@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-Widget actingRolesContainer({context}) {
+Widget actingRolesContainer(
+    {context,
+    required String img,
+    animeName,
+    animeRole,
+    charName,
+    charRole,
+    charImg}) {
+  final size = MediaQuery.of(context).size;
   return Container(
     height: 100,
     padding: const EdgeInsets.all(12),
@@ -14,13 +22,14 @@ Widget actingRolesContainer({context}) {
         Row(
           children: [
             ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Image.asset(
-                  'assets/images/loffyshare.png',
-                  height: 50,
-                  width: 50,
-                  fit: BoxFit.cover,
-                )),
+              borderRadius: BorderRadius.circular(10),
+              child: Image.network(
+                img,
+                height: 50,
+                width: 50,
+                fit: BoxFit.cover,
+              ),
+            ),
             10.widthBox,
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -33,9 +42,12 @@ Widget actingRolesContainer({context}) {
                     //     MaterialPageRoute(
                     //         builder: (context) =>  CastScreen()));
                   },
-                  child: 'Monkey D. Luffy'.text.white.make(),
+                  child: SizedBox(
+                    width: size.width * 0.4,
+                    child: "$animeName".text.white.make(),
+                  ),
                 ),
-                'Main Character'.text.white.make(),
+                "$animeRole".text.white.make(),
               ],
             )
           ],
@@ -55,15 +67,22 @@ Widget actingRolesContainer({context}) {
                     //     MaterialPageRoute(
                     //         builder: (context) => const VoiceActorScreen()));
                   },
-                  child: 'Mother Nanba'.text.white.make(),
+                  child: SizedBox(
+                    width: size.width * 0.2,
+                    child: "$charName"
+                        .text
+                        .white
+                        .overflow(TextOverflow.ellipsis)
+                        .make(),
+                  ),
                 ),
-                'Supporting'.text.white.make(),
+                "$charRole".text.white.make(),
               ],
             ),
             10.widthBox,
-            const CircleAvatar(
+            CircleAvatar(
               radius: 20,
-              backgroundImage: AssetImage('assets/images/loffyshare.png'),
+              backgroundImage: NetworkImage("$charImg"),
             ),
           ],
         ),

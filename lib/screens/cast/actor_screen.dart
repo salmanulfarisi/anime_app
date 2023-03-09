@@ -53,8 +53,10 @@ class VoiceActorScreen extends StatelessWidget {
                     height: size.height * 1.8,
                     child: TabBarView(
                       children: [
-                        actorAbout(context: context, data: actData[index]),
-                        actingRoles(),
+                        actorAbout(
+                            context: context, data: actData, index: index),
+                        actingRoles(
+                            context: context, data: actData, index: index),
                       ],
                     ),
                   ),

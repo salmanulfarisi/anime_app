@@ -4,18 +4,29 @@ import 'package:anime_app/widgets/widget_conts.dart';
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-Widget carosalContainer({context}) {
+Widget carosalContainer({
+  context,
+  caroselRanking,
+  caroselTitle,
+  caroselAnimeType,
+  caroselEpisodes,
+  caroselStareted,
+  caroselType,
+  caroselSynopsis,
+  caroselImg,
+  caroselAnimedesc,
+}) {
   final size = MediaQuery.of(context).size;
   return Stack(
     children: [
       Container(
         width: size.width,
-        decoration: const BoxDecoration(
-          borderRadius: BorderRadius.only(
+        decoration: BoxDecoration(
+          borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(20),
             topRight: Radius.circular(20),
           ),
-          boxShadow: [
+          boxShadow: const [
             BoxShadow(
               color: Colors.black26,
               offset: Offset(0, 2),
@@ -27,7 +38,7 @@ Widget carosalContainer({context}) {
             //   Colors.black54,
             //   BlendMode.darken,
             // ),
-            image: AssetImage('assets/images/welcome_background.png'),
+            image: NetworkImage(caroselImg),
             fit: BoxFit.cover,
           ),
         ),
@@ -55,30 +66,39 @@ Widget carosalContainer({context}) {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            caroselRanking.text.color(Colors.greenAccent).make(),
-            caroselTitle.text.color(Colors.white).xl4.make(),
+            "$caroselRanking".text.color(Colors.greenAccent).make(),
+            SizedBox(
+              width: size.width * 1.0,
+              child: "$caroselTitle"
+                  .text
+                  .color(Colors.white)
+                  .xl3
+                  .overflow(TextOverflow.ellipsis)
+                  .make(),
+            ),
             Row(
               children: [
                 rowIconsText(
                   icon: Icons.play_arrow,
-                  text: caroselAnimeType.text.color(Colors.white).make(),
+                  text: "$caroselAnimeType".text.color(Colors.white).make(),
                 ),
                 10.widthBox,
                 rowIconsText(
                   icon: Icons.tv,
-                  text: caroselEpisodes.text.color(Colors.white).make(),
+                  text: "$caroselEpisodes".text.color(Colors.white).make(),
                 ),
                 10.widthBox,
                 rowIconsText(
                   icon: Icons.calendar_month,
-                  text: caroselStareted.text.color(Colors.white).make(),
+                  text: "$caroselStareted".text.color(Colors.white).make(),
                 ),
               ],
             ),
             10.heightBox,
             SizedBox(
               width: size.width * 0.7,
-              child: caroselAnimedesc.text
+              child: "$caroselAnimedesc"
+                  .text
                   .color(Colors.white)
                   .maxLines(3)
                   .overflow(TextOverflow.ellipsis)

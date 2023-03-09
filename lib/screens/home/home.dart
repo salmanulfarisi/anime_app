@@ -16,14 +16,36 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            VxSwiper.builder(
-              autoPlay: true,
-              height: 350,
-              aspectRatio: 16 / 9,
-              viewportFraction: 1.0,
-              itemCount: 3,
-              itemBuilder: (context, index) {
-                return carosalContainer(context: context);
+            StreamBuilder(
+              stream: FireStoreServices.getSpotlightAnime(),
+              builder: (BuildContext context,
+                  AsyncSnapshot<QuerySnapshot> snapshot) {
+                if (!snapshot.hasData) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else {
+                  var data = snapshot.data!.docs;
+                  return VxSwiper.builder(
+                    autoPlay: true,
+                    height: 350,
+                    aspectRatio: 16 / 9,
+                    viewportFraction: 1.0,
+                    itemCount: data.length,
+                    itemBuilder: (context, index) {
+                      return carosalContainer(
+                        context: context,
+                        caroselAnimeType: data[index]['anime_type'],
+                        caroselTitle: data[index]['animeName'],
+                        caroselImg: data[index]['posterImg'][0],
+                        caroselRanking: "#${index + 1}Spotlight",
+                        caroselEpisodes: data[index]['total_episodes'] ?? '20',
+                        caroselStareted: data[index]['aired']['from'],
+                        caroselAnimedesc: data[index]['overview'],
+                      );
+                    },
+                  );
+                }
               },
             ),
             20.heightBox,
