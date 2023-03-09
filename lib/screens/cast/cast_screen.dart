@@ -1,6 +1,5 @@
 import 'package:anime_app/screens/cast/widgets/char_act_container.dart';
 import 'package:anime_app/screens/details/widgets/details_widget.dart';
-import 'package:anime_app/utils/const.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
@@ -87,7 +86,7 @@ class _CastScreenState extends State<CastScreen> {
                       )
                     ],
                   ),
-                  50.widthBox,
+                  20.widthBox,
                   Column(
                     children: [
                       Container(
@@ -101,17 +100,23 @@ class _CastScreenState extends State<CastScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            '${widget.data['name']}'
-                                .text
-                                .white
-                                .size(24)
-                                .fontWeight(FontWeight.bold)
-                                .make(),
-                            '${widget.data['role']}'
-                                .text
-                                .white
-                                .align(TextAlign.center)
-                                .make()
+                            SizedBox(
+                              width: size.width * 0.3,
+                              child: '${widget.data['name']}'
+                                  .text
+                                  .white
+                                  .size(24)
+                                  .fontWeight(FontWeight.bold)
+                                  .make(),
+                            ),
+                            SizedBox(
+                              width: size.width * 0.3,
+                              child: '${widget.data['jap_name']}'
+                                  .text
+                                  .white
+                                  .align(TextAlign.center)
+                                  .make(),
+                            )
                           ],
                         ),
                       ),
@@ -119,31 +124,39 @@ class _CastScreenState extends State<CastScreen> {
                   )
                 ]),
                 20.heightBox,
-                rowText(title: 'Age :', subtitle: '17,19'),
-                rowText(title: 'Birthdate :', subtitle: 'May 5, Taurus'),
-                rowText(title: 'Height :', subtitle: '172 cm,174 cm'),
-                rowText(title: 'Blood type :', subtitle: 'F'),
-                rowText(title: 'Affilation :', subtitle: 'Straw Hat Pirates'),
-                rowText(title: 'Position :', subtitle: 'Captain'),
+                rowText(title: 'Age :', subtitle: '${widget.data['age']}'),
+                rowText(
+                    title: 'Birthdate :',
+                    subtitle:
+                        '${widget.data['birthdate']}, ${widget.data['zodiac_sign']}'),
+                rowText(
+                    title: 'Height :', subtitle: '${widget.data['height']}'),
+                rowText(
+                    title: 'Blood type :',
+                    subtitle: '${widget.data['blood_type'] ?? '?'}'),
+                rowText(
+                    title: 'Affilation :',
+                    subtitle: '${widget.data['affiliation']}'),
+                rowText(
+                    title: 'Position :',
+                    subtitle: '${widget.data['position']}'),
                 rowText(
                     title: 'Devil fruit :',
-                    subtitle: 'Gomu Gomu no Mi(Gum Gum Fruit)'),
-                rowText(title: 'Type :', subtitle: 'jparamecia'),
+                    subtitle: '${widget.data['devil_fruit']}'),
+                rowText(title: 'Type :', subtitle: '${widget.data['type']}'),
                 rowText(
-                    title: 'Bounty :',
-                    subtitle:
-                        '1,500,000,000(previously; 30,000,000, 100,000,000, 300,000,000, 400,000,000 and 500,000,000)'),
+                    title: 'Bounty :', subtitle: '${widget.data['Bounty']}'),
                 30.heightBox,
-                const ReadMoreText(
-                  samplebio,
+                ReadMoreText(
+                  '${widget.data['over_view']}',
                   trimLines: 5,
                   colorClickableText: Colors.blue,
                   trimMode: TrimMode.Line,
                   trimCollapsedText: 'Show more',
                   trimExpandedText: ' Show less',
-                  style: TextStyle(fontSize: 14, color: Colors.white),
-                  moreStyle:
-                      TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontSize: 14, color: Colors.white),
+                  moreStyle: const TextStyle(
+                      fontSize: 14, fontWeight: FontWeight.bold),
                 ),
                 10.heightBox,
                 "Animeography".text.xl3.white.make(),
@@ -181,7 +194,7 @@ class _CastScreenState extends State<CastScreen> {
                   physics: const NeverScrollableScrollPhysics(),
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
-                    mainAxisExtent: 200,
+                    mainAxisExtent: 100,
                     mainAxisSpacing: 10,
                     crossAxisSpacing: 10,
                   ),
