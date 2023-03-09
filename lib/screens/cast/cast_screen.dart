@@ -153,17 +153,25 @@ class _CastScreenState extends State<CastScreen> {
                   physics: const NeverScrollableScrollPhysics(),
                   itemBuilder: (context, index) {
                     return ListTile(
-                      leading: const CircleAvatar(
+                      leading: CircleAvatar(
                         radius: 20,
-                        backgroundImage:
-                            AssetImage('assets/images/loffyshare.png'),
+                        backgroundImage: NetworkImage(
+                            "${widget.data['animeography'][index]['animeImg']}"),
                       ),
-                      title: 'One Piece'.text.white.make(),
-                      subtitle: 'Main Character'.text.white.make(),
+                      title:
+                          "${widget.data['animeography'][index]['anime_name']}"
+                              .text
+                              .white
+                              .make(),
+                      subtitle:
+                          "${widget.data['animeography'][index]['role']} (Role)"
+                              .text
+                              .white
+                              .make(),
                       trailing: const Icon(LineIcons.plus, color: Colors.white),
                     );
                   },
-                  itemCount: 3,
+                  itemCount: widget.data['animeography'].length,
                 ),
                 10.heightBox,
                 "Voice Actors".text.xl3.white.make(),
@@ -179,13 +187,13 @@ class _CastScreenState extends State<CastScreen> {
                   ),
                   itemBuilder: (context, index) {
                     return charActContainer(
-                      img:
-                          "https://img.zorores.com/_r/400x400/100/54/cb/54cbbb789b82a8ca6f4b4b360ff5dfb6/54cbbb789b82a8ca6f4b4b360ff5dfb6.jpg",
-                      name: "Brook",
-                      role: "Main",
+                      img: "${widget.data['voice_actors'][index]['actorImg']}",
+                      name:
+                          "${widget.data['voice_actors'][index]['actor_name']}",
+                      role: "${widget.data['voice_actors'][index]['place']}",
                     );
                   },
-                  itemCount: 5,
+                  itemCount: widget.data['voice_actors'].length,
                 )
               ],
             ),

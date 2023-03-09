@@ -1,3 +1,4 @@
+import 'package:anime_app/screens/cast/actor_screen.dart';
 import 'package:anime_app/screens/cast/cast_screen.dart';
 import 'package:anime_app/screens/cast/widgets/cast_widgets.dart';
 import 'package:flutter/material.dart';
@@ -68,10 +69,21 @@ class AllCast extends StatelessWidget {
                       childAspectRatio: 0.7,
                     )),
                     itemBuilder: (context, index) {
-                      return charActContainer(
-                        img: actData[index]['Img'],
-                        name: actData[index]['name'],
-                        role: actData[index]['place'],
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => VoiceActorScreen(
+                                        actData: actData[index],
+                                        index: index,
+                                      )));
+                        },
+                        child: charActContainer(
+                          img: actData[index]['Img'],
+                          name: actData[index]['name'],
+                          role: actData[index]['place'],
+                        ),
                       );
                     },
                     itemCount: actData.length,

@@ -4,7 +4,9 @@ import 'package:velocity_x/velocity_x.dart';
 
 class VoiceActorScreen extends StatelessWidget {
   final dynamic actData;
-  const VoiceActorScreen({Key? key, this.actData}) : super(key: key);
+  final int index;
+  const VoiceActorScreen({Key? key, this.actData, required this.index})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,14 +21,14 @@ class VoiceActorScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const CircleAvatar(
+                  CircleAvatar(
                     radius: 50,
-                    backgroundImage: AssetImage('assets/images/loffyshare.png'),
+                    backgroundImage: NetworkImage("${actData['Img']}"),
                   ),
                   20.heightBox,
-                  'Mayumi Tanaka'.text.white.xl4.make(),
+                  "${actData['name']}".text.white.xl4.make(),
                   10.heightBox,
-                  'jap Name'.text.white.xl2.make(),
+                  "${actData['place']}".text.white.xl2.make(),
                   20.heightBox,
                   TabBar(
                     indicatorColor: Colors.green,
@@ -51,7 +53,7 @@ class VoiceActorScreen extends StatelessWidget {
                     height: size.height * 1.8,
                     child: TabBarView(
                       children: [
-                        actorAbout(),
+                        actorAbout(context: context, data: actData[index]),
                         actingRoles(),
                       ],
                     ),

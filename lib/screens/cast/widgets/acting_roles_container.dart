@@ -1,4 +1,3 @@
-import 'package:anime_app/screens/cast/actor_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -51,10 +50,10 @@ Widget actingRolesContainer({context}) {
               children: [
                 GestureDetector(
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const VoiceActorScreen()));
+                    // Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //         builder: (context) => const VoiceActorScreen()));
                   },
                   child: 'Mother Nanba'.text.white.make(),
                 ),
