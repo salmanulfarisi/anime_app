@@ -1,6 +1,7 @@
 import 'package:anime_app/utils/const.dart';
 import 'package:anime_app/widgets/button_widgets.dart';
 import 'package:anime_app/widgets/widget_conts.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -19,29 +20,58 @@ Widget carosalContainer({
   final size = MediaQuery.of(context).size;
   return Stack(
     children: [
-      Container(
-        width: size.width,
-        decoration: BoxDecoration(
-          borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(20),
-            topRight: Radius.circular(20),
-          ),
-          boxShadow: const [
-            BoxShadow(
-              color: Colors.black26,
-              offset: Offset(0, 2),
-              blurRadius: 6.0,
+      CachedNetworkImage(
+        imageUrl: caroselImg,
+        imageBuilder: (context, imageProvider) => Container(
+          width: size.width,
+          decoration: BoxDecoration(
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(20),
+              topRight: Radius.circular(20),
             ),
-          ],
-          image: DecorationImage(
-            // colorFilter: ColorFilter.mode(
-            //   Colors.black54,
-            //   BlendMode.darken,
-            // ),
-            image: NetworkImage(caroselImg),
-            fit: BoxFit.cover,
+            boxShadow: const [
+              BoxShadow(
+                color: Colors.black26,
+                offset: Offset(0, 2),
+                blurRadius: 6.0,
+              ),
+            ],
+            image: DecorationImage(
+              // colorFilter: ColorFilter.mode(
+              //   Colors.black54,
+              //   BlendMode.darken,
+              // ),
+              image: imageProvider,
+              fit: BoxFit.cover,
+            ),
           ),
         ),
+        placeholder: (context, url) => caroselShimmer(context: context),
+        errorWidget: (context, url, error) => const Icon(Icons.error),
+        // child: Container(
+        //   width: size.width,
+        //   decoration: BoxDecoration(
+        //     borderRadius: const BorderRadius.only(
+        //       topLeft: Radius.circular(20),
+        //       topRight: Radius.circular(20),
+        //     ),
+        //     boxShadow: const [
+        //       BoxShadow(
+        //         color: Colors.black26,
+        //         offset: Offset(0, 2),
+        //         blurRadius: 6.0,
+        //       ),
+        //     ],
+        //     image: DecorationImage(
+        //       // colorFilter: ColorFilter.mode(
+        //       //   Colors.black54,
+        //       //   BlendMode.darken,
+        //       // ),
+        //       image: NetworkImage(caroselImg),
+        //       fit: BoxFit.cover,
+        //     ),
+        //   ),
+        // ),
       ),
       Container(
         width: size.width,

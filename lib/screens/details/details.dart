@@ -118,7 +118,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                             rowIconsText(
                               icon: Icons.star_rounded,
                               size: 24.0,
-                              text: "${widget.data['score']}"
+                              text: "${widget.data['score'] ?? 'N/A'}"
                                   .text
                                   .white
                                   .size(26)
@@ -135,7 +135,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                               icon: LineIcons.hashtag,
                               color: Colors.blueGrey,
                               size: 24.0,
-                              text: "${widget.data['rank']}"
+                              text: "${widget.data['rank'] ?? 'N/A'}"
                                   .text
                                   .white
                                   .size(18)
@@ -153,7 +153,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                               icon: LineIcons.hashtag,
                               color: Colors.blueGrey,
                               size: 24.0,
-                              text: "${widget.data['popularity']}"
+                              text: "${widget.data['popularity'] ?? 'N/A'}"
                                   .text
                                   .white
                                   .size(18)

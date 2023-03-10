@@ -1,7 +1,7 @@
 import 'package:anime_app/screens/details/details.dart';
 import 'package:anime_app/screens/home/widgets/home_widgets.dart';
 import 'package:anime_app/services/firestore_services.dart';
-import 'package:anime_app/widgets/carosal_container.dart';
+import 'package:anime_app/widgets/widget_conts.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -24,6 +24,9 @@ class HomeScreen extends StatelessWidget {
                   return const Center(
                     child: CircularProgressIndicator(),
                   );
+                } else if (snapshot.connectionState ==
+                    ConnectionState.waiting) {
+                  return caroselShimmer(context: context);
                 } else {
                   var data = snapshot.data!.docs;
                   return VxSwiper.builder(
@@ -56,7 +59,7 @@ class HomeScreen extends StatelessWidget {
               child: SizedBox(
                 height: 200, // fixed height of the horizontal list
                 child: StreamBuilder(
-                  stream: FireStoreServices.getTrendingAnime(),
+                  stream: FireStoreServices.getTrendingAnimeAsending(),
                   builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
                     if (!snapshot.hasData) {
                       return const Center(

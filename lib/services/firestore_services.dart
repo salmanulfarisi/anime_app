@@ -14,6 +14,14 @@ class FireStoreServices {
         .snapshots();
   }
 
+  // get trending anime in asending order
+  static getTrendingAnimeAsending() {
+    return firestore
+        .collection(animeCollection)
+        .orderBy('trendingNo', descending: false)
+        .snapshots();
+  }
+
   // get spotlight anime
   static getSpotlightAnime() {
     return firestore
