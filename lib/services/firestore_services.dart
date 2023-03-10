@@ -1,3 +1,4 @@
+import 'package:anime_app/models/anime_model.dart';
 import 'package:anime_app/utils/const.dart';
 
 class FireStoreServices {
@@ -37,5 +38,10 @@ class FireStoreServices {
         .doc(animeId)
         .collection(characterCollection)
         .snapshots();
+  }
+
+  // add anime
+  static addAnime(AnimeModel animeData) {
+    firestore.collection(animeCollection).add(animeData.toMap());
   }
 }

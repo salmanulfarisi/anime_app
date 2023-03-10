@@ -86,7 +86,9 @@ class HomeScreen extends StatelessWidget {
                             },
                             child: topAnime(
                                 context: context,
-                                index: "0${index + 1}",
+                                index: index == 9
+                                    ? '${index + 1}'
+                                    : "0${index + 1}",
                                 animeName: data[index]['animeName'],
                                 animeImage: data[index]['posterImg'][0]),
                           );

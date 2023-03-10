@@ -1,6 +1,10 @@
+import 'package:anime_app/screens/admin/add_anime.dart';
+import 'package:anime_app/screens/home/home.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class Welcome extends StatefulWidget {
   const Welcome({
@@ -69,22 +73,54 @@ class _WelcomeState extends State<Welcome> {
                 const SizedBox(
                   height: 24,
                 ),
-                Container(
-                  width: 360,
-                  height: 58,
-                  decoration: BoxDecoration(
-                    color: const Color(0xff06c149),
-                    borderRadius: BorderRadius.circular(100),
+                GestureDetector(
+                  onTap: () {
+                    Get.to(() => const HomeScreen());
+                  },
+                  child: Container(
+                    width: 360,
+                    height: 58,
+                    decoration: BoxDecoration(
+                      color: const Color(0xff06c149),
+                      borderRadius: BorderRadius.circular(100),
+                    ),
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: Text(
+                        'Get Start',
+                        style: GoogleFonts.urbanist(
+                          textStyle: const TextStyle(
+                            fontSize: 16,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: Text(
-                      'Get Start',
-                      style: GoogleFonts.urbanist(
-                        textStyle: const TextStyle(
-                          fontSize: 16,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
+                ),
+                10.heightBox,
+                GestureDetector(
+                  onTap: () {
+                    Get.to(() => const AdMinPanel());
+                  },
+                  child: Container(
+                    width: 360,
+                    height: 58,
+                    decoration: BoxDecoration(
+                      color: const Color(0xff06c149),
+                      borderRadius: BorderRadius.circular(100),
+                    ),
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: Text(
+                        'Start as Admin',
+                        style: GoogleFonts.urbanist(
+                          textStyle: const TextStyle(
+                            fontSize: 16,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ),

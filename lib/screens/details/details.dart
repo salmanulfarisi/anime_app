@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:anime_app/screens/admin/add_anime.dart';
 import 'package:anime_app/screens/cast/all_char_act_screen.dart';
 import 'package:anime_app/screens/details/widgets/details_widget.dart';
 import 'package:anime_app/screens/details/widgets/detil_buttons.dart';
@@ -27,7 +28,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
   String get docId => widget.data.id;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     log(docId);
   }
@@ -36,7 +36,27 @@ class _DetailsScreenState extends State<DetailsScreen> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const AdMinPanel()));
+              },
+              icon: const Icon(
+                Icons.favorite_border,
+                color: Colors.white,
+              )),
+          IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                Icons.share,
+                color: Colors.white,
+              )),
+        ],
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
