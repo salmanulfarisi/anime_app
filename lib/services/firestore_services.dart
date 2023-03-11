@@ -52,4 +52,12 @@ class FireStoreServices {
   static addAnime(AnimeModel animeData) {
     firestore.collection(animeCollection).add(animeData.toMap());
   }
+
+  // update content is same id anime
+  static updateAnime(AnimeModel animeData) {
+    firestore
+        .collection(animeCollection)
+        .doc(animeData.id)
+        .update(animeData.toMap());
+  }
 }

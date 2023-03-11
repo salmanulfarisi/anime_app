@@ -1,4 +1,4 @@
-import 'package:anime_app/screens/welcome.dart';
+import 'package:anime_app/screens/admin/main/main_adminpanel.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
         ),
         iconTheme: const IconThemeData(color: Colors.black),
       ),
-      home: const Welcome(),
+      home: const MainAdminPanel(),
     );
   }
 }
