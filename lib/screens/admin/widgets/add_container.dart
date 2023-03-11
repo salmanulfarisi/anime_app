@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-Widget addContainer({String text = 'Add Character', ontap}) {
+Widget addContainer({String text = 'Add Actor', ontap}) {
   return GestureDetector(
     onTap: ontap,
     child: Container(

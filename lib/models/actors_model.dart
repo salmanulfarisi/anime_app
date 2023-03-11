@@ -5,6 +5,7 @@ class Actors {
   final String birthName;
   final String birthPlace;
   final String profile;
+  final String bloodType;
   final List<ActingRoles> actingRoles;
   final List<String> skillability;
 
@@ -15,6 +16,7 @@ class Actors {
     required this.birthName,
     required this.birthPlace,
     required this.profile,
+    required this.bloodType,
     required this.actingRoles,
     required this.skillability,
   });
@@ -26,6 +28,7 @@ class Actors {
       actorPlace: data['actorPlace'],
       birthName: data['birthName'],
       birthPlace: data['birthPlace'],
+      bloodType: data['bloodType'],
       profile: data['profile'],
       actingRoles: List<ActingRoles>.from(
           data['actingRoles'].map((x) => ActingRoles.fromMap(x))),
@@ -41,6 +44,7 @@ class Actors {
       'birth_name': birthName,
       'birth_place': birthPlace,
       'profile': profile,
+      'blood_type': bloodType,
       'acting_roles': actingRoles.map((x) => x.toMap()).toList(),
       'skill_abilities': skillability,
     };

@@ -73,15 +73,15 @@ class AnimeModel {
 
   Map<String, dynamic> toMap() {
     return {
-      'animeImg': List<dynamic>.from(animeImg.map((x) => x)),
+      'posterImg': List<dynamic>.from(animeImg.map((x) => x)),
       'animeName': animeName,
       'actors': List<dynamic>.from(actors.map((x) => x.toMap())),
       'aired': aired.toMap(),
-      'charactorActor':
+      'characters&actors':
           List<dynamic>.from(charactorActor.map((x) => x.toMap())),
       'charactors': List<dynamic>.from(charactors.map((x) => x.toMap())),
       'id': id,
-      'japaneseName': japaneseName,
+      'japanese': japaneseName,
       'overview': overview,
       'popularity': popularity,
       'producers': producers,
@@ -89,10 +89,10 @@ class AnimeModel {
       'rating': rating,
       'score': score,
       'status': status,
-      'studio': studio,
+      'studios': studio,
       'type': type,
       'synonyms': synonyms,
-      'totalEpisodes': totalEpisodes,
+      'total_episodes': totalEpisodes,
     };
   }
 }

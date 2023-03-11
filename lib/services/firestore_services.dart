@@ -31,6 +31,14 @@ class FireStoreServices {
         .snapshots();
   }
 
+  // get Top airing anime in asending order
+  static getTopAiringAnimeAsending() {
+    return firestore
+        .collection(animeCollection)
+        .orderBy('topAiringNo', descending: false)
+        .snapshots();
+  }
+
   // get charector subcollection
   static getCharector(animeId) {
     return firestore

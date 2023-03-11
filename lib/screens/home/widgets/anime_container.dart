@@ -1,65 +1,87 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-Widget animeContainer({context}) {
+Widget animeContainer({context, required String animeName, animeImage, index}) {
   final size = MediaQuery.of(context).size;
-  return Container(
-    child: Row(
-      children: [
-        Container(
-          width: size.width * 0.15,
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  Colors.transparent,
-                  Colors.black38,
-                ]),
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(10),
-              bottomLeft: Radius.circular(10),
-            ),
+  return Row(
+    children: [
+      Container(
+        width: size.width * 0.15,
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Colors.grey,
+                Colors.transparent,
+              ]),
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(10),
+            bottomLeft: Radius.circular(10),
           ),
-          child: Center(
-            child: Column(
-              children: [
-                const Spacer(),
-                RotatedBox(
+        ),
+        child: Center(
+          child: Column(
+            children: [
+              Expanded(
+                flex: 5,
+                child: RotatedBox(
                   quarterTurns: 3, // rotate the text by 90 degrees clockwise
-                  child: 'Vertical Text'
-                      .text
-                      .fontWeight(FontWeight.normal)
-                      .size(18)
-                      .overflow(TextOverflow.ellipsis)
-                      .white
-                      .make(),
+                  child: SizedBox(
+                    width: size.width * 0.3,
+                    child: animeName.text
+                        .fontWeight(FontWeight.normal)
+                        .size(18)
+                        .overflow(TextOverflow.ellipsis)
+                        .white
+                        .make(),
+                  ),
                 ),
-                const Spacer(),
-                '01'
+              ),
+              10.heightBox,
+              Expanded(
+                flex: 1,
+                child: '$index'
                     .text
                     .color(Colors.green)
                     .fontWeight(FontWeight.bold)
                     .size(32)
                     .make(),
-              ],
+              ),
+            ],
+          ),
+        ),
+      ),
+      CachedNetworkImage(
+        imageUrl: '$animeImage',
+        imageBuilder: (context, imageProvider) => Container(
+          width: size.width * 0.4,
+          decoration: BoxDecoration(
+            color: Colors.green,
+            borderRadius: const BorderRadius.only(
+              topRight: Radius.circular(10),
+              bottomRight: Radius.circular(10),
+            ),
+            image: DecorationImage(
+              fit: BoxFit.cover,
+              image: imageProvider,
             ),
           ),
         ),
-        Container(
+        placeholder: (context, url) => VxShimmer(
+            child: Container(
           width: size.width * 0.4,
           decoration: const BoxDecoration(
-              color: Colors.green,
-              borderRadius: BorderRadius.only(
-                topRight: Radius.circular(10),
-                bottomRight: Radius.circular(10),
-              ),
-              image: DecorationImage(
-                fit: BoxFit.cover,
-                image: AssetImage('assets/images/welcome_background.png'),
-              )),
-        ),
-      ],
-    ),
+            color: Colors.white,
+            borderRadius: BorderRadius.only(
+              topRight: Radius.circular(10),
+              bottomRight: Radius.circular(10),
+            ),
+          ),
+        )),
+        errorWidget: (context, url, error) => const Icon(Icons.error),
+      ),
+    ],
   );
 }

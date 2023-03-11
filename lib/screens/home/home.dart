@@ -122,23 +122,56 @@ class HomeScreen extends StatelessWidget {
               ],
             ),
             titleContainer(text: 'Top Airing'),
+            10.heightBox,
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: SizedBox(
                 height: 200, // fixed height of the horizontal list
-                child: ListView.separated(
-                  scrollDirection: Axis.horizontal,
-                  physics: const BouncingScrollPhysics(),
-                  itemCount: 10, // number of items in the list
-                  itemBuilder: (BuildContext context, int index) {
-                    return animeContainer(context: context);
-                  },
-                  separatorBuilder: (BuildContext context, int index) {
-                    return 10.widthBox;
+                child: StreamBuilder(
+                  stream: FireStoreServices.getTopAiringAnimeAsending(),
+                  builder: (BuildContext context,
+                      AsyncSnapshot<QuerySnapshot> snapshot) {
+                    if (!snapshot.hasData) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    } else {
+                      var data = snapshot.data!.docs;
+
+                      return ListView.separated(
+                        scrollDirection: Axis.horizontal,
+                        physics: const BouncingScrollPhysics(),
+                        itemCount: data.length, // number of items in the list
+                        itemBuilder: (BuildContext context, int index) {
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => DetailsScreen(
+                                            data: data[index],
+                                            id: snapshot.data!.docs[index].id,
+                                          )));
+                            },
+                            child: animeContainer(
+                              context: context,
+                              index:
+                                  index == 9 ? '${index + 1}' : "0${index + 1}",
+                              animeName: data[index]['animeName'],
+                              animeImage: data[index]['posterImg'][0],
+                            ),
+                          );
+                        },
+                        separatorBuilder: (BuildContext context, int index) {
+                          return 10.widthBox;
+                        },
+                      );
+                    }
                   },
                 ),
               ),
             ),
+            10.heightBox,
             titleContainer(text: 'Most Popular'),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -149,7 +182,13 @@ class HomeScreen extends StatelessWidget {
                   physics: const BouncingScrollPhysics(),
                   itemCount: 10, // number of items in the list
                   itemBuilder: (BuildContext context, int index) {
-                    return animeContainer(context: context);
+                    return animeContainer(
+                      context: context,
+                      index: index == 9 ? '${index + 1}' : "0${index + 1}",
+                      animeName: 'One Piece',
+                      animeImage:
+                          'https://cdn.myanimelist.net/images/anime/5/73245.jpg',
+                    );
                   },
                   separatorBuilder: (BuildContext context, int index) {
                     return 10.widthBox;
@@ -167,7 +206,13 @@ class HomeScreen extends StatelessWidget {
                   physics: const BouncingScrollPhysics(),
                   itemCount: 10, // number of items in the list
                   itemBuilder: (BuildContext context, int index) {
-                    return animeContainer(context: context);
+                    return animeContainer(
+                      context: context,
+                      index: index == 9 ? '${index + 1}' : "0${index + 1}",
+                      animeName: 'One Piece',
+                      animeImage:
+                          'https://cdn.myanimelist.net/images/anime/5/73245.jpg',
+                    );
                   },
                   separatorBuilder: (BuildContext context, int index) {
                     return 10.widthBox;
@@ -185,7 +230,13 @@ class HomeScreen extends StatelessWidget {
                   physics: const BouncingScrollPhysics(),
                   itemCount: 10, // number of items in the list
                   itemBuilder: (BuildContext context, int index) {
-                    return animeContainer(context: context);
+                    return animeContainer(
+                      context: context,
+                      index: index == 9 ? '${index + 1}' : "0${index + 1}",
+                      animeName: 'One Piece',
+                      animeImage:
+                          'https://cdn.myanimelist.net/images/anime/5/73245.jpg',
+                    );
                   },
                   separatorBuilder: (BuildContext context, int index) {
                     return 10.widthBox;

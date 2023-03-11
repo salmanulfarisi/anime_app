@@ -8,6 +8,7 @@ import 'package:anime_app/widgets/widget_conts.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:readmore/readmore.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -339,15 +340,19 @@ class _DetailsScreenState extends State<DetailsScreen> {
                               content:
                                   "To Know More About ${widget.data['characters&actors'][index]['act_name']} Go to the Cast Page",
                               onpress: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => AllCast(
+                                // Navigator.push(
+                                //   context,
+                                //   MaterialPageRoute(
+                                //     builder: (context) => AllCast(
+                                //       data: widget.data['charaters'],
+                                //       actData: widget.data['actors'],
+                                //     ),
+                                //   ),
+                                // );
+                                Get.to(() => AllCast(
                                       data: widget.data['charaters'],
                                       actData: widget.data['actors'],
-                                    ),
-                                  ),
-                                );
+                                    ));
                               },
                             );
                           },

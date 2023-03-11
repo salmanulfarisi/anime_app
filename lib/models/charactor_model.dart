@@ -105,9 +105,9 @@ class Animeography {
   Map<String, dynamic> toMap() {
     return {
       'animeImg': animeImg,
-      'animeName': animeName,
-      'animeRole': animeRole,
-      'animeType': animeType,
+      'anime_name': animeName,
+      'role': animeRole,
+      'anime_type': animeType,
     };
   }
 }
@@ -134,8 +134,8 @@ class VoiceActors {
   Map<String, dynamic> toMap() {
     return {
       'actorImg': actorImg,
-      'actorName': actorName,
-      'actorPlace': actorPlace,
+      'actor_name': actorName,
+      'place': actorPlace,
     };
   }
 }

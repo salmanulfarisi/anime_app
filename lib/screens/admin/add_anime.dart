@@ -1,9 +1,9 @@
+import 'dart:developer';
+
 import 'package:anime_app/controller/admin_controller.dart';
-import 'package:anime_app/models/anime_model.dart';
 import 'package:anime_app/screens/admin/actors.dart';
 import 'package:anime_app/screens/admin/widgets/charactor.dart';
 import 'package:anime_app/screens/admin/widgets/widgets.dart';
-import 'package:anime_app/services/firestore_services.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:line_icons/line_icons.dart';
@@ -48,15 +48,16 @@ class _AdMinPanelState extends State<AdMinPanel> {
     setState(() {
       controller.showDoneIcon =
           controller.animeImageUrlController.text.isNotEmpty;
-      controller.isSkillSelected = controller.skillController.text.isNotEmpty;
+      // controller.isSkillSelected = controller.skillController.text.isNotEmpty;
     });
   }
 
   @override
   void initState() {
     super.initState();
-    print(controller.imgUrl);
-    controller.skillController.addListener(_onTextChanged);
+    log("${controller.skills}===1==");
+    log("${controller.skills}=========");
+    // controller.skillController.addListener(_onTextChanged);
 
     controller.animeImageUrlController.addListener(_onTextChanged);
   }
@@ -305,7 +306,36 @@ class _AdMinPanelState extends State<AdMinPanel> {
                 ],
               ),
               10.heightBox,
-              'Characters & Actors'.text.white.xl2.make(),
+              Row(
+                children: [
+                  'Characters & Actors'.text.white.xl2.make(),
+                  const Spacer(),
+                  ElevatedButton(
+                    style: controller.charactorValidate()
+                        ? ElevatedButton.styleFrom(
+                            foregroundColor: Colors.black,
+                            backgroundColor: Colors.white,
+                          )
+                        : ElevatedButton.styleFrom(
+                            foregroundColor: Colors.white,
+                            backgroundColor: Colors.black,
+                          ),
+                    onPressed: () {
+                      if (controller.charactorValidate()) {
+                        controller.addCharactorActor();
+                      } else {
+                        VxToast.show(
+                          context,
+                          msg: 'Please Fill All The Fields',
+                          bgColor: Colors.red,
+                          textColor: Colors.white,
+                        );
+                      }
+                    },
+                    child: 'Add Character'.text.make(),
+                  ),
+                ],
+              ),
               10.heightBox,
               adminTextformField(
                   hint: "character Image Url",
@@ -329,45 +359,44 @@ class _AdMinPanelState extends State<AdMinPanel> {
               adminTextformField(
                   hint: "Actor Place",
                   controller: controller.actPlaceController),
-              10.heightBox,
-              ElevatedButton(
-                onPressed: () async {
-                  await FireStoreServices.addAnime(
-                    AnimeModel(
-                      animeImg: controller.imgUrl,
-                      animeName: controller.animeNameController.text,
-                      actors: [],
-                      aired: Airing(from: '', to: ''),
-                      charactorActor: [],
-                      charactors: [],
-                      id: '',
-                      japaneseName: controller.animeJapnameController.text,
-                      overview: controller.animeOverviewController.text,
-                      popularity:
-                          int.parse(controller.animePopularityController.text),
-                      producers: controller.animeProducersController.text,
-                      rank: int.parse(controller.animeRankController.text),
-                      rating: controller.animeRatingController.text,
-                      score: double.parse(controller.animeScoreController.text),
-                      status: controller.isAiringSelected
-                          ? 'Airing'
-                          : controller.isFinishedSelected
-                              ? 'Finished'
-                              : 'Not Yet Aired',
-                      studio: controller.animeStudiosController.text,
-                      type: controller.isTvSelected
-                          ? 'TV'
-                          : controller.isMovieSelected
-                              ? 'Movie'
-                              : 'OVA',
-                      synonyms: controller.animeSynonymsController.text,
-                      totalEpisodes:
-                          controller.animeTotalEpisodesController.text,
-                    ),
-                  );
-                },
-                child: "Add".text.make(),
-              ),
+              // ElevatedButton(
+              //   onPressed: () async {
+              //     await FireStoreServices.addAnime(
+              //       AnimeModel(
+              //         animeImg: controller.imgUrl,
+              //         animeName: controller.animeNameController.text,
+              //         actors: controller.actorModel,
+              //         aired: Airing(from: '', to: ''),
+              //         charactorActor: [],
+              //         charactors: [],
+              //         id: '',
+              //         japaneseName: controller.animeJapnameController.text,
+              //         overview: controller.animeOverviewController.text,
+              //         popularity:
+              //             int.parse(controller.animePopularityController.text),
+              //         producers: controller.animeProducersController.text,
+              //         rank: int.parse(controller.animeRankController.text),
+              //         rating: controller.animeRatingController.text,
+              //         score: double.parse(controller.animeScoreController.text),
+              //         status: controller.isAiringSelected
+              //             ? 'Airing'
+              //             : controller.isFinishedSelected
+              //                 ? 'Finished'
+              //                 : 'Not Yet Aired',
+              //         studio: controller.animeStudiosController.text,
+              //         type: controller.isTvSelected
+              //             ? 'TV'
+              //             : controller.isMovieSelected
+              //                 ? 'Movie'
+              //                 : 'OVA',
+              //         synonyms: controller.animeSynonymsController.text,
+              //         totalEpisodes:
+              //             controller.animeTotalEpisodesController.text,
+              //       ),
+              //     );
+              //   },
+              //   child: "Add".text.make(),
+              // ),
               10.heightBox,
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -376,7 +405,7 @@ class _AdMinPanelState extends State<AdMinPanel> {
                     Get.to(() => const ActorsPage());
                   }),
                   addContainer(
-                      text: 'Add Actor',
+                      text: 'Add Character',
                       ontap: () {
                         Get.to(() => const CharacterPage());
                       }),
