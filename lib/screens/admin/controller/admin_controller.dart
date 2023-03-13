@@ -29,7 +29,7 @@ class AdminController extends GetxController {
 
   late YoutubePlayerController youtubeController;
   var videoId = YoutubePlayer.convertUrlToId(
-      "https://www.youtube.com/watch?v=BBAyRBTfsOU");
+      'https://www.youtube.com/watch?v=Q8TXgCzxEnw');
   @override
   void onInit() {
     super.onInit();
@@ -38,7 +38,7 @@ class AdminController extends GetxController {
       initialVideoId: videoId.toString(),
       flags: const YoutubePlayerFlags(
         mute: false,
-        autoPlay: true,
+        autoPlay: false,
         disableDragSeek: false,
         loop: false,
         isLive: false,

@@ -4,7 +4,6 @@ import 'package:anime_app/screens/admin/details/widgets/builder_container.dart';
 import 'package:anime_app/screens/admin/details/widgets/carousel_widet.dart';
 import 'package:anime_app/screens/admin/details/widgets/colum_row_text.dart';
 import 'package:anime_app/screens/admin/details/widgets/title_text.dart';
-import 'package:anime_app/screens/admin/details/widgets/video_container.dart';
 import 'package:anime_app/screens/admin/details/widgets/youtube.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -122,10 +121,12 @@ class AnimeDetailsAdmin extends StatelessWidget {
                   moreStyle: const TextStyle(
                       fontSize: 14, fontWeight: FontWeight.bold),
                 ),
+                // 10.heightBox,
+                // const VideoContainer(),
                 10.heightBox,
-                const VideoContainer(),
-                10.heightBox,
-                youTubePlayer(),
+                Youtube(
+                  data: data,
+                ),
                 Row(
                   children: [
                     titleText(title: 'Anime Info'),
