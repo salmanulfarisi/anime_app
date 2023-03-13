@@ -1,4 +1,4 @@
-import 'package:anime_app/models/anime_model.dart';
+import 'package:anime_app/screens/admin/model/anime_model.dart';
 import 'package:anime_app/utils/const.dart';
 
 class FireStoreServices {
@@ -48,16 +48,21 @@ class FireStoreServices {
         .snapshots();
   }
 
-  // add anime
-  static addAnime(AnimeModel animeData) {
-    firestore.collection(animeCollection).add(animeData.toMap());
-  }
+  // // add anime
+  // static addAnime(AnimeModel animeData) {
+  //   firestore.collection(animeCollection).add(animeData.toMap());
+  // }
 
-  // update content is same id anime
-  static updateAnime(AnimeModel animeData) {
-    firestore
-        .collection(animeCollection)
-        .doc(animeData.id)
-        .update(animeData.toMap());
+  // // update content is same id anime
+  // static updateAnime(AnimeModel animeData) {
+  //   firestore
+  //       .collection(animeCollection)
+  //       .doc(animeData.id)
+  //       .update(animeData.toMap());
+  // }
+
+  // add anime details to admin anime collection
+  static addAnimeDetails(AnimeModel animeData) {
+    firestore.collection(adminAnimeCollection).add(animeData.toMap());
   }
 }

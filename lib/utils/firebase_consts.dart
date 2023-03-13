@@ -8,3 +8,6 @@ User? currentUser = auth.currentUser;
 // collections
 const animeCollection = 'anime';
 const characterCollection = 'charactor';
+
+// new collection
+const adminAnimeCollection = 'adminAnime';

@@ -274,7 +274,7 @@ class AnimeDetailsAdmin extends StatelessWidget {
                           itemBuilder: (context, index) => builderContainer(
                             color: index.isEven ? Colors.blue : Colors.red,
                             imge:
-                                'https://wallpapers.com/images/featured/msy6tovm9j3z2zxc.jpg',
+                                'https://images.hdqwalls.com/download/anime-ninja-4k-lo-1920x1080.jpg',
                           ),
                           separatorBuilder: (context, index) => 10.widthBox,
                           itemCount: 10,
