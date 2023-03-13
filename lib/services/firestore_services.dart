@@ -65,4 +65,9 @@ class FireStoreServices {
   static addAnimeDetails(AnimeModel animeData) {
     firestore.collection(adminAnimeCollection).add(animeData.toMap());
   }
+
+  // get new document id
+  static getNewDocumentId() {
+    return firestore.collection(adminAnimeCollection).doc().id;
+  }
 }

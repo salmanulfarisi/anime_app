@@ -1,5 +1,8 @@
+import 'package:anime_app/screens/admin/addAnime/add_anime.dart';
 import 'package:anime_app/screens/admin/addAnime/widgets/custom_textfield.dart';
 import 'package:anime_app/screens/admin/controller/admin_controller.dart';
+import 'package:anime_app/screens/admin/model/anime_model.dart';
+import 'package:anime_app/services/firestore_services.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -89,7 +92,57 @@ class AddAnimeType extends StatelessWidget {
                   width: context.screenWidth,
                   height: context.screenHeight * 0.06,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      await FireStoreServices.addAnimeDetails(
+                        AnimeModel(
+                          id: FireStoreServices.getNewDocumentId(),
+                          animeName: controller.animeNameController.text,
+                          animeImage: controller.imageList,
+                          animeType: controller.isMovie.value == true
+                              ? 'Movie'
+                              : controller.isTv.value == true
+                                  ? 'TV'
+                                  : 'Unknown',
+                          animeStatus: controller.isAiring.value == true
+                              ? 'Airing'
+                              : controller.isFinished.value == true
+                                  ? 'Finished'
+                                  : 'Not Yet',
+                          animeScore: double.parse(
+                              controller.animeScoreController.text),
+                          animeRank:
+                              int.parse(controller.animeRankController.text),
+                          animePopularity: int.parse(
+                              controller.animePopularityController.text),
+                          animeStrory: controller.animeStoryController.text,
+                          animeJapaneseName:
+                              controller.japaneseNameController.text,
+                          animeSource: controller.animeSourceController.text,
+                          animeSeasone: controller.animeSeasoneController.text,
+                          animeStudio: controller.animeStudioController.text,
+                          animeRating: controller.animeRatingController.text,
+                          aired: Airing(
+                              from: controller.animeAirFromController.text,
+                              to: controller.animeAirToController.text),
+                          animeLicensor:
+                              controller.animeLicensorController.text,
+                          animeSynonyms: controller.synonymsController.text,
+                          producers: controller.producerList,
+                          externalLinks: controller.linkList,
+                          animeInfo: controller.infoController.text,
+                          animeOtherInfo: controller.otherInfoController.text,
+                          trendingNo: controller.isTrending.value == true
+                              ? int.parse(controller.trendingNoController.text)
+                              : 0,
+                          topAiringNo: controller.isTopAired.value == true
+                              ? int.parse(controller.topAiredNoController.text)
+                              : 0,
+                        ),
+                      );
+                      VxToast.show(context, msg: 'Anime Added Successfully');
+                      controller.clearAllTextControllers();
+                      Get.offAll(() => const AddAnime());
+                    },
                     child: 'Add Anime Type'.text.make(),
                   ),
                 )

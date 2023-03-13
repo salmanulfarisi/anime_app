@@ -20,6 +20,11 @@ class AdminController extends GetxController {
   var isAllFilled = false.obs;
   var isTrending = false.obs;
   var isTopAired = false.obs;
+  var isMovie = false.obs;
+  var isTv = false.obs;
+  var isAiring = false.obs;
+  var isFinished = false.obs;
+  var isNotyet = false.obs;
 
   // main text controllers
   var animeImageController = TextEditingController();
@@ -50,6 +55,68 @@ class AdminController extends GetxController {
   // add anime type
   var trendingNoController = TextEditingController();
   var topAiredNoController = TextEditingController();
+
+  // all text controllers clear
+  void clearAllTextControllers() {
+    animeImageController.clear();
+    animeNameController.clear();
+    animePopularityController.clear();
+    animeRankController.clear();
+    animeScoreController.clear();
+    animeRatingController.clear();
+    animeCurrentEpisodeController.clear();
+    animeTotalEpisodeController.clear();
+    animeStoryController.clear();
+    animeSourceController.clear();
+    animeSeasoneController.clear();
+    animeStudioController.clear();
+    animeLicensorController.clear();
+    animeAirFromController.clear();
+    animeAirToController.clear();
+    infoController.clear();
+    japaneseNameController.clear();
+    synonymsController.clear();
+    producerController.clear();
+    producerLinkController.clear();
+    linkNameController.clear();
+    linkController.clear();
+    otherInfoController.clear();
+    trendingNoController.clear();
+    topAiredNoController.clear();
+  }
+
+// select anime as Tv
+  void selectTv() {
+    isTv.value = true;
+    isMovie.value = false;
+  }
+
+  // select anime as Movie
+  void selectMovie() {
+    isMovie.value = true;
+    isTv.value = false;
+  }
+
+  // select anime as Airing
+  void selectAiring() {
+    isAiring.value = true;
+    isFinished.value = false;
+    isNotyet.value = false;
+  }
+
+  // select anime as Finished
+  void selectFinished() {
+    isFinished.value = true;
+    isAiring.value = false;
+    isNotyet.value = false;
+  }
+
+  // select anime as Not Yet
+  void selectNotyet() {
+    isNotyet.value = true;
+    isAiring.value = false;
+    isFinished.value = false;
+  }
 
   // visible button when all fields are filled
   checkAllFieldsFilled() {

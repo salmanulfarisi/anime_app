@@ -150,27 +150,30 @@ class AddAnime extends StatelessWidget {
                   hint: 'Enter Anime Name',
                 ),
                 20.heightBox,
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    animeTypeContainer(
-                      context: context,
-                      icon: LineIcons.film,
-                      label: 'Movie',
-                      onpress: () {
-                        // controller.animeType.value = 'Movie';
-                      },
-                    ),
-                    animeTypeContainer(
-                      isSelected: false,
-                      context: context,
-                      icon: LineIcons.television,
-                      label: 'Tv',
-                      onpress: () {
-                        // controller.animeType.value = 'Movie';
-                      },
-                    ),
-                  ],
+                Obx(
+                  () => Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      animeTypeContainer(
+                        isSelected: controller.isMovie.value,
+                        context: context,
+                        icon: LineIcons.film,
+                        label: 'Movie',
+                        onpress: () {
+                          controller.selectMovie();
+                        },
+                      ),
+                      animeTypeContainer(
+                        isSelected: controller.isTv.value,
+                        context: context,
+                        icon: LineIcons.television,
+                        label: 'Tv',
+                        onpress: () {
+                          controller.selectTv();
+                        },
+                      ),
+                    ],
+                  ),
                 ),
                 20.heightBox,
                 Wrap(
@@ -185,6 +188,7 @@ class AddAnime extends StatelessWidget {
                         SizedBox(
                             width: size.width * 0.2,
                             child: customTextField(
+                              keyboardtype: TextInputType.number,
                               controller: controller.animePopularityController,
                               hint: 'popularity',
                             )),
@@ -198,6 +202,7 @@ class AddAnime extends StatelessWidget {
                         SizedBox(
                           width: size.width * 0.2,
                           child: customTextField(
+                            keyboardtype: TextInputType.number,
                             controller: controller.animeRankController,
                             hint: 'Rank',
                           ),
@@ -212,6 +217,7 @@ class AddAnime extends StatelessWidget {
                         SizedBox(
                           width: size.width * 0.2,
                           child: customTextField(
+                            keyboardtype: TextInputType.number,
                             controller: controller.animeScoreController,
                             hint: 'Score',
                           ),
@@ -246,6 +252,7 @@ class AddAnime extends StatelessWidget {
                         SizedBox(
                           width: size.width * 0.3,
                           child: customTextField(
+                            keyboardtype: TextInputType.number,
                             controller:
                                 controller.animeCurrentEpisodeController,
                             hint: 'Current Episode',
@@ -260,6 +267,7 @@ class AddAnime extends StatelessWidget {
                         SizedBox(
                           width: size.width * 0.3,
                           child: customTextField(
+                            keyboardtype: TextInputType.number,
                             controller: controller.animeTotalEpisodeController,
                             hint: 'Total Episodes',
                           ),
@@ -271,31 +279,39 @@ class AddAnime extends StatelessWidget {
                 20.heightBox,
                 titleText(title: 'Status'),
                 10.heightBox,
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    statusContainer(
-                      context: context,
-                      text: 'Airing',
-                      ontap: () {},
-                      borderColor: Colors.green,
-                      isSelect: true,
-                    ),
-                    statusContainer(
-                      context: context,
-                      text: 'Finished',
-                      ontap: () {},
-                      borderColor: Colors.blue,
-                      isSelect: true,
-                    ),
-                    statusContainer(
-                      context: context,
-                      text: 'Not Released',
-                      ontap: () {},
-                      borderColor: Colors.white,
-                      isSelect: true,
-                    ),
-                  ],
+                Obx(
+                  () => Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      statusContainer(
+                        context: context,
+                        text: 'Airing',
+                        ontap: () {
+                          controller.selectAiring();
+                        },
+                        borderColor: Colors.green,
+                        isSelect: controller.isAiring.value,
+                      ),
+                      statusContainer(
+                        context: context,
+                        text: 'Finished',
+                        ontap: () {
+                          controller.selectFinished();
+                        },
+                        borderColor: Colors.blue,
+                        isSelect: controller.isFinished.value,
+                      ),
+                      statusContainer(
+                        context: context,
+                        text: 'Not Released',
+                        ontap: () {
+                          controller.selectNotyet();
+                        },
+                        borderColor: Colors.white,
+                        isSelect: controller.isNotyet.value,
+                      ),
+                    ],
+                  ),
                 ),
                 20.heightBox,
                 customTextField(

@@ -6,7 +6,7 @@ class AnimeModel {
   final String animeStatus;
   final double animeScore;
   final int animeRank;
-  final String animePopularity;
+  final int animePopularity;
   final String animeStrory;
   final String animeJapaneseName;
   final String animeSource;
@@ -16,8 +16,8 @@ class AnimeModel {
   final Airing aired;
   final String animeLicensor;
   final String animeSynonyms;
-  final Producers producers;
-  final ExternalLinks externalLinks;
+  final List<Map<String, String>> producers;
+  final List<Map<String, String>> externalLinks;
   final String animeInfo;
   final String animeOtherInfo;
   final int trendingNo;
@@ -68,10 +68,12 @@ class AnimeModel {
       'animeLicensor': animeLicensor,
       'aired': aired.toMap(),
       'animeSynonyms': animeSynonyms,
-      'producers': producers.toMap(),
-      'externalLinks': externalLinks.toMap(),
+      'producers': producers.map((e) => e).toList(),
+      'externalLinks': externalLinks.map((e) => e).toList(),
       'animeInfo': animeInfo,
       'animeOtherInfo': animeOtherInfo,
+      'trendingNo': trendingNo,
+      'topAiringNo': topAiringNo,
     };
   }
 }
