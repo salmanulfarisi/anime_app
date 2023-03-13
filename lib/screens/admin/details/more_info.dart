@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class MoreInfo extends StatelessWidget {
-  const MoreInfo({Key? key}) : super(key: key);
+  final dynamic data;
+  const MoreInfo({Key? key, this.data}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,9 +17,9 @@ class MoreInfo extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                "More Zoro is the best site to watch Golden Kamuy Season 4 SUB online, or you can even watch Golden Kamuy Season 4 DUB in HD quality. You can also find Brain's Base anime on Zoro website. You can also find Brain's Base anime on Zoro website.",
-                style: TextStyle(
+              Text(
+                "${data['animeInfo']}",
+                style: const TextStyle(
                   color: Colors.white,
                 ),
               ),
@@ -27,15 +28,34 @@ class MoreInfo extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   "Japanese".text.white.make(),
-                  "ゴールデンカムイ".text.white.make(),
+                  "${data['animeJapaneseName']}".text.white.make(),
                 ],
+              ),
+              20.heightBox,
+              Visibility(
+                visible: data['animeSynonyms'] != null,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    "Synonyms".text.white.make(),
+                    "${data['animeSynonyms']}".text.white.make(),
+                  ],
+                ),
               ),
               20.heightBox,
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   "Producers".text.white.make(),
-                  "FujiTv".text.white.make(),
+                  Row(
+                    children: List.generate(
+                      data == null ? 0 : data['producers'].length,
+                      (index) => "${data['producers'][index]['name']} . "
+                          .text
+                          .color(Colors.blue)
+                          .make(),
+                    ),
+                  ),
                 ],
               ),
               20.heightBox,
@@ -43,8 +63,21 @@ class MoreInfo extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   "External Links".text.white.make(),
-                  "Official Site".text.white.make(),
+                  Row(
+                    children: List.generate(
+                      data == null ? 0 : data['externalLinks'].length,
+                      (index) => "${data['externalLinks'][0]['name']} . "
+                          .text
+                          .color(Colors.blue)
+                          .make(),
+                    ),
+                  ),
                 ],
+              ),
+              20.heightBox,
+              Visibility(
+                visible: data['animeOtherInfo'] != '',
+                child: "${data['animeOtherInfo']}".text.white.make(),
               ),
             ],
           ),

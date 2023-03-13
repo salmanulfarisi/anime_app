@@ -10,15 +10,15 @@ Widget carousalWidget({context, data, controller}) {
   return Column(
     children: [
       CarouselSlider.builder(
-        itemCount: data['posterImg'].length,
+        itemCount: data['animeImage'].length,
         itemBuilder: (context, index, realIndex) {
           return CachedNetworkImage(
-            imageUrl: "${data['posterImg'][index]}",
+            imageUrl: "${data['animeImage'][index]}",
             imageBuilder: (context, imageProvider) => Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: imageProvider,
-                  fit: BoxFit.cover,
+                  fit: BoxFit.scaleDown,
                 ),
               ),
             ),
@@ -60,7 +60,7 @@ Widget carousalWidget({context, data, controller}) {
       Obx(
         () => AnimatedSmoothIndicator(
           activeIndex: controller.currentIndex.value,
-          count: data['posterImg'].length,
+          count: data['animeImage'].length,
           effect: const ExpandingDotsEffect(
             activeDotColor: Color(0xff06c149),
             dotHeight: 6,

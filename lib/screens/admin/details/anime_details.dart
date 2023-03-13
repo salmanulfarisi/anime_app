@@ -28,10 +28,10 @@ class AnimeDetailsAdmin extends StatelessWidget {
               Text(data['animeName'], style: const TextStyle(fontSize: 18)),
               Row(
                 children: [
-                  Text(data['anime_type'],
-                      style: const TextStyle(fontSize: 12)),
+                  Text(data['animeType'], style: const TextStyle(fontSize: 12)),
                   const Text(".", style: TextStyle(fontSize: 12)),
-                  Text("Ep: ${data['total_episodes']}/?",
+                  Text(
+                      "Ep: ${data['episodes']['currentEpisode']}/${data['episodes']['totalEpisodes']}",
                       style: const TextStyle(fontSize: 12)),
                 ],
               ),
@@ -77,17 +77,17 @@ class AnimeDetailsAdmin extends StatelessWidget {
                           title: 'Score',
                           icon: Icons.star,
                           color: Colors.yellow,
-                          content: '8.61'),
+                          content: '${data['animeScore']}'),
                       columRowText(
                           title: 'Rank',
                           icon: LineIcons.hashtag,
                           color: Colors.greenAccent,
-                          content: '884'),
+                          content: '${data['animeRank']}'),
                       columRowText(
                           title: 'Popularity',
                           icon: LineIcons.hashtag,
                           color: Colors.greenAccent,
-                          content: '884'),
+                          content: '${data['animePopularity']}'),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -97,7 +97,7 @@ class AnimeDetailsAdmin extends StatelessWidget {
                               .fontWeight(FontWeight.bold)
                               .make(),
                           Text(
-                            "${data['status']}",
+                            "${data['animeStatus']}",
                             style: const TextStyle(
                               color: Colors.greenAccent,
                               fontWeight: FontWeight.bold,
@@ -111,7 +111,7 @@ class AnimeDetailsAdmin extends StatelessWidget {
                 ),
                 10.heightBox,
                 ReadMoreText(
-                  '${data['overview']}',
+                  '${data['animeStrory']}',
                   trimLines: 5,
                   colorClickableText: Colors.blue,
                   trimMode: TrimMode.Line,
@@ -126,11 +126,11 @@ class AnimeDetailsAdmin extends StatelessWidget {
                 10.heightBox,
                 Row(
                   children: [
-                    titleText(title: 'Animo Info'),
+                    titleText(title: 'Anime Info'),
                     const Spacer(),
                     TextButton(
                       onPressed: () {
-                        Get.to(() => const MoreInfo());
+                        Get.to(() => MoreInfo(data: data));
                       },
                       child: const Text(
                         "More Info",
@@ -155,7 +155,10 @@ class AnimeDetailsAdmin extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       'Japanese'.text.color(Colors.grey).make(),
-                      'One Piece'.text.color(Colors.white).make(),
+                      '${data['animeJapaneseName']}'
+                          .text
+                          .color(Colors.white)
+                          .make(),
                       10.heightBox,
                       Row(
                         children: [
@@ -164,7 +167,10 @@ class AnimeDetailsAdmin extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 'Source'.text.color(Colors.grey).make(),
-                                'Manga'.text.color(Colors.white).make(),
+                                '${data['animeSource']}'
+                                    .text
+                                    .color(Colors.white)
+                                    .make(),
                               ],
                             ),
                           ),
@@ -174,7 +180,10 @@ class AnimeDetailsAdmin extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 'Season'.text.color(Colors.grey).make(),
-                                'Fall 1999'.text.color(Colors.white).make(),
+                                '${data['animeSeasone']}'
+                                    .text
+                                    .color(Colors.white)
+                                    .make(),
                               ],
                             ),
                           ),
@@ -188,7 +197,10 @@ class AnimeDetailsAdmin extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 'Studio'.text.color(Colors.grey).make(),
-                                'studioName'.text.color(Colors.white).make(),
+                                '${data['animeStudio']}'
+                                    .text
+                                    .color(Colors.blue)
+                                    .make(),
                               ],
                             ),
                           ),
@@ -198,7 +210,10 @@ class AnimeDetailsAdmin extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 'Aired'.text.color(Colors.grey).make(),
-                                'Date to date'.text.color(Colors.white).make(),
+                                '${data['aired']['from']} to ${data['aired']['to'] == '' ? '?' : data['aired']['to']}'
+                                    .text
+                                    .color(Colors.white)
+                                    .make(),
                               ],
                             ),
                           ),
@@ -212,7 +227,10 @@ class AnimeDetailsAdmin extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 'Rating'.text.color(Colors.grey).make(),
-                                'PG-13'.text.color(Colors.white).make(),
+                                '${data['animeRating']}'
+                                    .text
+                                    .color(Colors.white)
+                                    .make(),
                               ],
                             ),
                           ),
@@ -222,7 +240,10 @@ class AnimeDetailsAdmin extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 'Licensor'.text.color(Colors.grey).make(),
-                                'Name'.text.color(Colors.white).make(),
+                                '${data['animeLicensor']}'
+                                    .text
+                                    .color(Colors.blue)
+                                    .make(),
                               ],
                             ),
                           ),

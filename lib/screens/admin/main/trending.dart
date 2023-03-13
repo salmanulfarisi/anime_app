@@ -1,6 +1,4 @@
-import 'package:anime_app/screens/admin/addAnime/add_anime.dart';
 import 'package:anime_app/screens/admin/details/anime_details.dart';
-import 'package:anime_app/screens/admin/main/trending.dart';
 import 'package:anime_app/screens/admin/main/widgets/anime_container.dart';
 import 'package:anime_app/services/firestore_services.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -8,55 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class MainAdminPanel extends StatelessWidget {
-  const MainAdminPanel({Key? key}) : super(key: key);
+class TrendingAnime extends StatelessWidget {
+  const TrendingAnime({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return Scaffold(
-      drawer: Drawer(
-        child: ListView(
-          children: [
-            DrawerHeader(
-              child: 'Admin Panel'
-                  .text
-                  .white
-                  .xl3
-                  .fontWeight(FontWeight.bold)
-                  .make(),
-            ),
-            ListTile(
-              onTap: () {
-                Get.back();
-              },
-              title: 'Home'.text.white.make(),
-            ),
-            ListTile(
-              onTap: () {
-                Get.back();
-                Get.to(() => const TrendingAnime());
-              },
-              title: 'Trending Anime'.text.white.make(),
-            ),
-            ListTile(
-              onTap: () {
-                Get.back();
-                Get.to(() => const AddAnime());
-              },
-              title: 'Add Anime'.text.white.make(),
-            ),
-          ],
-        ),
-      ),
       appBar: AppBar(
-        title: const Text('Admin Panel'),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.logout),
-          ),
-        ],
+        title: const Text('Trending Anime'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -64,10 +21,15 @@ class MainAdminPanel extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              "All Anime".text.white.xl3.fontWeight(FontWeight.bold).make(),
+              "Trending Anime"
+                  .text
+                  .white
+                  .xl3
+                  .fontWeight(FontWeight.bold)
+                  .make(),
               10.heightBox,
               StreamBuilder(
-                stream: FireStoreServices.getAnimeDetails(),
+                stream: FireStoreServices.getTrendingAnimeDetailsAsending(),
                 builder: (BuildContext context,
                     AsyncSnapshot<QuerySnapshot> snapshot) {
                   if (!snapshot.hasData) {
@@ -108,12 +70,6 @@ class MainAdminPanel extends StatelessWidget {
             ],
           ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Get.to(() => const AddAnime());
-        },
-        child: const Icon(Icons.add),
       ),
     );
   }

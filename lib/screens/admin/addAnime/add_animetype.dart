@@ -122,8 +122,13 @@ class AddAnimeType extends StatelessWidget {
                           animeStudio: controller.animeStudioController.text,
                           animeRating: controller.animeRatingController.text,
                           aired: Airing(
-                              from: controller.animeAirFromController.text,
-                              to: controller.animeAirToController.text),
+                              from:
+                                  controller.animeAirFromController.text.isEmpty
+                                      ? '?'
+                                      : controller.animeAirFromController.text,
+                              to: controller.animeAirToController.text.isEmpty
+                                  ? '?'
+                                  : controller.animeAirToController.text),
                           animeLicensor:
                               controller.animeLicensorController.text,
                           animeSynonyms: controller.synonymsController.text,
@@ -131,6 +136,19 @@ class AddAnimeType extends StatelessWidget {
                           externalLinks: controller.linkList,
                           animeInfo: controller.infoController.text,
                           animeOtherInfo: controller.otherInfoController.text,
+                          episodes: Episodes(
+                              currentEpisode: controller
+                                      .animeCurrentEpisodeController
+                                      .text
+                                      .isEmpty
+                                  ? 0
+                                  : int.parse(controller
+                                      .animeCurrentEpisodeController.text),
+                              totalEpisodes: controller
+                                      .animeTotalEpisodeController.text.isEmpty
+                                  ? 0
+                                  : int.parse(controller
+                                      .animeTotalEpisodeController.text)),
                           trendingNo: controller.isTrending.value == true
                               ? int.parse(controller.trendingNoController.text)
                               : 0,

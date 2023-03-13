@@ -20,6 +20,7 @@ class AnimeModel {
   final List<Map<String, String>> externalLinks;
   final String animeInfo;
   final String animeOtherInfo;
+  final Episodes episodes;
   final int trendingNo;
   final int topAiringNo;
 
@@ -45,6 +46,7 @@ class AnimeModel {
     required this.externalLinks,
     required this.animeInfo,
     required this.animeOtherInfo,
+    required this.episodes,
     required this.trendingNo,
     required this.topAiringNo,
   });
@@ -72,8 +74,33 @@ class AnimeModel {
       'externalLinks': externalLinks.map((e) => e).toList(),
       'animeInfo': animeInfo,
       'animeOtherInfo': animeOtherInfo,
+      'episodes': episodes.toMap(),
       'trendingNo': trendingNo,
       'topAiringNo': topAiringNo,
+    };
+  }
+}
+
+class Episodes {
+  final int currentEpisode;
+  final int totalEpisodes;
+
+  Episodes({
+    required this.currentEpisode,
+    required this.totalEpisodes,
+  });
+
+  factory Episodes.fromMap(Map<String, dynamic> data) {
+    return Episodes(
+      currentEpisode: data['currentEpisode'],
+      totalEpisodes: data['totalEpisodes'],
+    );
+  }
+
+  Map<String, int> toMap() {
+    return {
+      'currentEpisode': currentEpisode,
+      'totalEpisodes': totalEpisodes,
     };
   }
 }
