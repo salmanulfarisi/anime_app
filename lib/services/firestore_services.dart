@@ -80,6 +80,15 @@ class FireStoreServices {
         .snapshots();
   }
 
+  // get topAiring anime details from admin anime collection in asending order while topAiring no gretter than 0
+  static getTopAiringAnimeDetailsAsending() {
+    return firestore
+        .collection(adminAnimeCollection)
+        .where('topAiringNo', isGreaterThan: 0)
+        .orderBy('topAiringNo', descending: false)
+        .snapshots();
+  }
+
   // get new document id
   static getNewDocumentId() {
     return firestore.collection(adminAnimeCollection).doc().id;

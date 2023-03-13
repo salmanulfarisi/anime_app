@@ -1,4 +1,4 @@
-import 'package:anime_app/screens/admin/add_anime.dart';
+import 'package:anime_app/screens/admin/main/main_adminpanel.dart';
 import 'package:anime_app/screens/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -102,7 +102,7 @@ class _WelcomeState extends State<Welcome> {
                 10.heightBox,
                 GestureDetector(
                   onTap: () {
-                    Get.to(() => const AdMinPanel());
+                    Get.to(() => const MainAdminPanel());
                   },
                   child: Container(
                     width: 360,

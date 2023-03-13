@@ -1,4 +1,4 @@
-import 'package:anime_app/screens/admin/main/main_adminpanel.dart';
+import 'package:anime_app/screens/welcome.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -18,14 +18,14 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        canvasColor: Colors.transparent,
+        canvasColor: Colors.black,
         appBarTheme: const AppBarTheme(
           backgroundColor: Colors.transparent,
           elevation: 0,
         ),
         iconTheme: const IconThemeData(color: Colors.black),
       ),
-      home: const MainAdminPanel(),
+      home: const Welcome(),
     );
   }
 }

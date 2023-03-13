@@ -128,7 +128,7 @@ class HomeScreen extends StatelessWidget {
               child: SizedBox(
                 height: 200, // fixed height of the horizontal list
                 child: StreamBuilder(
-                  stream: FireStoreServices.getTopAiringAnimeAsending(),
+                  stream: FireStoreServices.getTopAiringAnimeDetailsAsending(),
                   builder: (BuildContext context,
                       AsyncSnapshot<QuerySnapshot> snapshot) {
                     if (!snapshot.hasData) {
@@ -158,7 +158,7 @@ class HomeScreen extends StatelessWidget {
                               index:
                                   index == 9 ? '${index + 1}' : "0${index + 1}",
                               animeName: data[index]['animeName'],
-                              animeImage: data[index]['posterImg'][0],
+                              animeImage: data[index]['animeImage'][0],
                             ),
                           );
                         },

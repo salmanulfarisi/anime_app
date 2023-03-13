@@ -75,7 +75,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 10, vertical: 10),
                             child: CarouselSlider.builder(
-                              itemCount: widget.data['posterImg'].length,
+                              itemCount: widget.data['animeImage'].length,
                               itemBuilder: (context, index, realIndex) {
                                 return Container(
                                   width: size.width * 0.60,
@@ -83,7 +83,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                   decoration: BoxDecoration(
                                       image: DecorationImage(
                                     image: NetworkImage(
-                                        "${widget.data['posterImg'][index]}"),
+                                        "${widget.data['animeImage'][index]}"),
                                     fit: BoxFit.cover,
                                   )),
                                 );
@@ -105,7 +105,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                       20.heightBox,
                       AnimatedSmoothIndicator(
                         activeIndex: currentpos,
-                        count: widget.data['posterImg'].length,
+                        count: widget.data['animeImage'].length,
                         effect: const ExpandingDotsEffect(
                           activeDotColor: Color(0xff06c149),
                           dotHeight: 6,
@@ -139,7 +139,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                             rowIconsText(
                               icon: Icons.star_rounded,
                               size: 24.0,
-                              text: "${widget.data['score'] ?? 'N/A'}"
+                              text: "${widget.data['animeScore'] ?? 'N/A'}"
                                   .text
                                   .white
                                   .size(26)
@@ -156,7 +156,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                               icon: LineIcons.hashtag,
                               color: Colors.blueGrey,
                               size: 24.0,
-                              text: "${widget.data['rank'] ?? 'N/A'}"
+                              text: "${widget.data['animeRank'] ?? 'N/A'}"
                                   .text
                                   .white
                                   .size(18)
@@ -174,7 +174,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                               icon: LineIcons.hashtag,
                               color: Colors.blueGrey,
                               size: 24.0,
-                              text: "${widget.data['popularity'] ?? 'N/A'}"
+                              text: "${widget.data['animePopularity'] ?? 'N/A'}"
                                   .text
                                   .white
                                   .size(18)
@@ -188,7 +188,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                 .white
                                 .fontWeight(FontWeight.w500)
                                 .make(),
-                            "${widget.data['status']}"
+                            "${widget.data['animeStatus']}"
                                 .text
                                 .white
                                 .size(18)
@@ -251,7 +251,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                     .make(),
                 10.heightBox,
                 ReadMoreText(
-                  '${widget.data['overview']}',
+                  '${widget.data['animeStrory']}',
                   trimLines: 5,
                   colorClickableText: Colors.blue,
                   trimMode: TrimMode.Line,
@@ -264,26 +264,29 @@ class _DetailsScreenState extends State<DetailsScreen> {
                 10.heightBox,
                 rowText(
                     title: 'Japanese :',
-                    subtitle: '${widget.data['japanese']}'),
+                    subtitle: '${widget.data['animeJapaneseName']}'),
                 rowText(
                     title: 'Synonyms :',
-                    subtitle: '${widget.data['synonyms']}'),
+                    subtitle: '${widget.data['animeSynonyms']}'),
                 rowText(
-                    title: 'Rating :', subtitle: '${widget.data['rating']}'),
+                    title: 'Rating :',
+                    subtitle: '${widget.data['animeRating']}'),
                 rowText(
-                    title: 'Studios :', subtitle: '${widget.data['studios']}'),
+                    title: 'Studios :',
+                    subtitle: '${widget.data['animeStudio']}'),
                 rowText(
                     title: 'Genres :', subtitle: 'Action, Adventure, Comedy'),
                 rowText(
                     title: 'Total Episodes :',
-                    subtitle: '${widget.data['total_episodes'] ?? '?'}'),
+                    subtitle:
+                        '${widget.data['episodes']['totalEpisodes'] ?? '?'}'),
                 rowText(
                     title: 'Aired :',
                     subtitle:
                         '${widget.data['aired']['from']} to ${widget.data['aired']['to'] ?? '?'}'),
                 rowText(
                     title: 'Producers :',
-                    subtitle: '${widget.data['producers']}'),
+                    subtitle: '${widget.data['producers'][0]['name'] ?? '?'}'),
                 // rowText(
                 //     title: 'Licensors :',
                 //     subtitle: '${widget.data['Licensors']}'),
@@ -310,11 +313,11 @@ class _DetailsScreenState extends State<DetailsScreen> {
                             return dialogueBox(
                               context: context,
                               title:
-                                  "${widget.data['characters&actors'][index]['char_name']}",
+                                  "{widget.data['characters&actors'][index]['char_name']}",
                               content:
                                   "To Know More About ${widget.data['characters&actors'][index]['char_name']} Go to the Charector Page",
                               onpress: () {
-                                print(widget.data['charaters'].toString());
+                                // print(widget.data['charaters'].toString());
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
@@ -336,7 +339,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                             return dialogueBox(
                               context: context,
                               title:
-                                  "${widget.data['characters&actors'][index]['act_name']}",
+                                  "{widget.data['characters&actors'][index]['act_name']}",
                               content:
                                   "To Know More About ${widget.data['characters&actors'][index]['act_name']} Go to the Cast Page",
                               onpress: () {
@@ -359,23 +362,24 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         );
                       },
                       charectorName:
-                          "${widget.data['characters&actors'][index]['char_name']}",
+                          "{widget.data['characters&actors'][index]['char_name']}",
                       role:
-                          "${widget.data['characters&actors'][index]['char_role']}",
+                          "{widget.data['characters&actors'][index]['char_role']}",
                       actor:
-                          "${widget.data['characters&actors'][index]['act_name']}",
+                          "{widget.data['characters&actors'][index]['act_name']}",
                       place:
-                          "${widget.data['characters&actors'][index]['act_place']}",
+                          "{widget.data['characters&actors'][index]['act_place']}",
                       actorImg:
-                          "${widget.data['characters&actors'][index]['actImg']}",
+                          "{widget.data['characters&actors'][index]['actImg']}",
                       charImg:
-                          "${widget.data['characters&actors'][index]['charImg']}",
+                          "{widget.data['characters&actors'][index]['charImg']}",
                     );
                   },
                   separatorBuilder: (context, index) {
                     return 10.heightBox;
                   },
-                  itemCount: widget.data['characters&actors'].length,
+                  itemCount: 5,
+                  // itemCount: widget.data['characters&actors'].length,
                 )
               ],
             ),

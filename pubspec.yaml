@@ -43,9 +43,12 @@ dependencies:
   get: ^4.6.5
   google_fonts: ^4.0.3
   line_icons: ^2.0.1
+  pod_player: ^0.1.0
   readmore: ^2.2.0
   smooth_page_indicator: ^1.0.1
   velocity_x: ^3.6.0
+  video_player: ^2.6.0
+  youtube_player_flutter: ^8.1.2
 
 dev_dependencies:
   flutter_lints: ^1.0.0

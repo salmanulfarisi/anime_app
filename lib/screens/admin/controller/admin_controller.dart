@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class AdminController extends GetxController {
   var currentIndex = 0.obs;
@@ -25,6 +26,40 @@ class AdminController extends GetxController {
   var isAiring = false.obs;
   var isFinished = false.obs;
   var isNotyet = false.obs;
+
+  late YoutubePlayerController youtubeController;
+  var videoId = YoutubePlayer.convertUrlToId(
+      "https://www.youtube.com/watch?v=BBAyRBTfsOU");
+  @override
+  void onInit() {
+    super.onInit();
+
+    youtubeController = YoutubePlayerController(
+      initialVideoId: videoId.toString(),
+      flags: const YoutubePlayerFlags(
+        mute: false,
+        autoPlay: true,
+        disableDragSeek: false,
+        loop: false,
+        isLive: false,
+        forceHD: false,
+        enableCaption: true,
+      ),
+    );
+  }
+
+  // @override
+  // void onInit() {
+  //   super.onInit();
+
+  //   controller = VideoPlayerController.network(
+  //       'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4')
+  //     ..initialize().then((_) {
+  //       controller.setLooping(true);
+  //       controller.play();
+  //       update();
+  //     });
+  // }
 
   // main text controllers
   var animeImageController = TextEditingController();
