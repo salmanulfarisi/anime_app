@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:anime_app/screens/admin/addAnime/add_staffs.dart';
 import 'package:anime_app/screens/admin/addAnime/widgets/custom_textfield.dart';
 import 'package:anime_app/screens/admin/controller/admin_controller.dart';
 import 'package:anime_app/screens/admin/details/widgets/title_text.dart';
@@ -21,6 +22,14 @@ class _AddCharactorState extends State<AddCharactor> {
     return Scaffold(
       appBar: AppBar(
         title: "Charactor&Actor".text.white.make(),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Get.to(() => const AddStaffs());
+            },
+            icon: const Icon(Icons.add),
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Padding(

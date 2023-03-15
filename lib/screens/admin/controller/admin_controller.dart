@@ -1,5 +1,6 @@
 import 'package:anime_app/screens/admin/model/actor_model.dart';
 import 'package:anime_app/screens/admin/model/charactor_model.dart';
+import 'package:anime_app/screens/admin/model/staff_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -22,6 +23,7 @@ class AdminController extends GetxController {
   var linkList = <Map<String, String>>[].obs;
   List<Charactor> charactorList = <Charactor>[].obs;
   List<Actor> actorList = <Actor>[].obs;
+  List<Staff> staffList = <Staff>[].obs;
 
   // bool
   var isAllFilled = false.obs;
@@ -108,6 +110,11 @@ class AdminController extends GetxController {
   var actorNameController = TextEditingController();
   var actorImageController = TextEditingController();
   var actorLinkController = TextEditingController();
+  // staff text field
+  var staffNameController = TextEditingController();
+  var staffImageController = TextEditingController();
+  var staffPositionController = TextEditingController();
+  var staffLinkController = TextEditingController();
 
   // add charactor to charactorList
   void addCharactor() {
@@ -134,6 +141,22 @@ class AdminController extends GetxController {
       actorNameController.clear();
       actorImageController.clear();
       actorLinkController.clear();
+    }
+  }
+
+  // add staff to staffList
+  void addStaff() {
+    if (staffNameController.text.isNotEmpty &&
+        staffImageController.text.isNotEmpty) {
+      staffList.add(Staff(
+          name: staffNameController.text,
+          image: staffImageController.text,
+          position: staffPositionController.text,
+          link: staffLinkController.text));
+      staffNameController.clear();
+      staffImageController.clear();
+      staffPositionController.clear();
+      staffLinkController.clear();
     }
   }
 

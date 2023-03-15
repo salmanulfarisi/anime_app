@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-Widget builderContainer({color, imge}) {
+Widget builderContainer({color, imge, required String charactorName}) {
   return Stack(
     children: [
       CachedNetworkImage(
@@ -11,15 +11,16 @@ Widget builderContainer({color, imge}) {
           padding: const EdgeInsets.all(8),
           width: 150,
           decoration: BoxDecoration(
-              color: color,
-              borderRadius: BorderRadius.circular(10),
-              image: DecorationImage(
-                  fit: BoxFit.cover,
-                  colorFilter: const ColorFilter.mode(
-                    Colors.black12,
-                    BlendMode.darken,
-                  ),
-                  image: imageProvider)),
+            color: color,
+            borderRadius: BorderRadius.circular(10),
+            image: DecorationImage(
+                fit: BoxFit.cover,
+                colorFilter: const ColorFilter.mode(
+                  Colors.black12,
+                  BlendMode.darken,
+                ),
+                image: imageProvider),
+          ),
         ),
         placeholder: (context, url) => VxShimmer(
           child: Container(
@@ -30,12 +31,7 @@ Widget builderContainer({color, imge}) {
           ),
         ),
         errorWidget: (context, url, error) {
-          return Container(
-            decoration: BoxDecoration(
-              color: Colors.grey,
-              borderRadius: BorderRadius.circular(10),
-            ),
-          );
+          return const Icon(Icons.error);
         },
         // child: Container(
         //   padding: const EdgeInsets.all(8),
@@ -68,7 +64,7 @@ Widget builderContainer({color, imge}) {
           ),
           child: Align(
             alignment: Alignment.centerLeft,
-            child: 'Name'.text.white.make(),
+            child: charactorName.text.white.make(),
           ),
         ),
       )

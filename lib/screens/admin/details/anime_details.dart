@@ -272,6 +272,7 @@ class AnimeDetailsAdmin extends StatelessWidget {
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(
                         height: 200,
@@ -279,13 +280,17 @@ class AnimeDetailsAdmin extends StatelessWidget {
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
                           scrollDirection: Axis.horizontal,
-                          itemBuilder: (context, index) => builderContainer(
-                            color: index.isEven ? Colors.blue : Colors.red,
-                            imge:
-                                'https://wallpapers.com/images/featured/msy6tovm9j3z2zxc.jpg',
-                          ),
+                          itemBuilder: (context, index) {
+                            return builderContainer(
+                              charactorName: data['charactors'][index]
+                                  ['charactorName'],
+                              color: index.isEven ? Colors.blue : Colors.red,
+                              imge:
+                                  "${data['charactors'][index]['charactorImage']}",
+                            );
+                          },
                           separatorBuilder: (context, index) => 10.widthBox,
-                          itemCount: 10,
+                          itemCount: data['charactors'].length,
                         ),
                       ),
                       10.heightBox,
@@ -296,12 +301,13 @@ class AnimeDetailsAdmin extends StatelessWidget {
                           physics: const NeverScrollableScrollPhysics(),
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) => builderContainer(
+                            charactorName:
+                                '${data['actors'][index]['actorName']}',
                             color: index.isEven ? Colors.blue : Colors.red,
-                            imge:
-                                'https://images.hdqwalls.com/download/anime-ninja-4k-lo-1920x1080.jpg',
+                            imge: '${data['actors'][index]['actorImage']}',
                           ),
                           separatorBuilder: (context, index) => 10.widthBox,
-                          itemCount: 10,
+                          itemCount: data['actors'].length,
                         ),
                       )
                     ],

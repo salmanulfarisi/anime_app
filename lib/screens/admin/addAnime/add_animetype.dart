@@ -96,6 +96,7 @@ class AddAnimeType extends StatelessWidget {
                         AnimeModel(
                           charactors: controller.charactorList,
                           actors: controller.actorList,
+                          staff: controller.staffList,
                           id: FireStoreServices.getNewDocumentId(),
                           animeName: controller.animeNameController.text,
                           animeVideo: controller.animeVideoController.text,

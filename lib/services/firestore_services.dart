@@ -1,7 +1,5 @@
 import 'package:anime_app/screens/admin/model/anime_model.dart';
-import 'package:anime_app/screens/admin/model/charactor_model.dart';
 import 'package:anime_app/utils/const.dart';
-import 'package:velocity_x/velocity_x.dart';
 
 class FireStoreServices {
   // get anime Collection
@@ -50,32 +48,9 @@ class FireStoreServices {
         .snapshots();
   }
 
-  // // add anime
-  // static addAnime(AnimeModel animeData) {
-  //   firestore.collection(animeCollection).add(animeData.toMap());
-  // }
-
-  // // update content is same id anime
-  // static updateAnime(AnimeModel animeData) {
-  //   firestore
-  //       .collection(animeCollection)
-  //       .doc(animeData.id)
-  //       .update(animeData.toMap());
-  // }
-
   // add anime details to admin anime collection
   static addAnimeDetails(AnimeModel animeData) {
     firestore.collection(adminAnimeCollection).add(animeData.toMap());
-  }
-
-  // add sub collection to admin anime collection
-  static addSubCollectionToAdminAnimeCollection(
-      String animeId, Charactor charactorData) {
-    firestore
-        .collection(adminAnimeCollection)
-        .doc(animeId)
-        .collection(adminCharacterCollection)
-        .add(charactorData.toMap());
   }
 
   // get anime details from admin anime collection
@@ -105,36 +80,8 @@ class FireStoreServices {
     return firestore.collection(adminAnimeCollection).doc().id;
   }
 
-  // get new document id for character
-  static getNewDocumentIdForCharacter(animeId) {
-    return firestore
-        .collection(adminAnimeCollection)
-        .doc(animeId)
-        .collection(characterCollection)
-        .doc()
-        .id;
-  }
-
-  // update anime details
-  static updateAnimeDetails(AnimeModel animeData) {
-    firestore
-        .collection(adminAnimeCollection)
-        .doc(animeData.id)
-        .update(animeData.toMap());
-  }
-
-  // getAnime Name by id
-  static getAnimeNameById(context, animeId) {
-    return firestore
-        .collection(adminAnimeCollection)
-        .where('id', isEqualTo: animeId)
-        .get()
-        .then((value) {
-      if (value.docs.isNotEmpty) {
-        return VxToast.show(context, msg: "${value.docs[0]['animeName']}");
-      } else {
-        return VxToast.show(context, msg: 'Anime not found');
-      }
-    });
+  // get character list from admin anime collection
+  static getCharacterList() {
+    return firestore.collection(adminAnimeCollection).snapshots();
   }
 }
