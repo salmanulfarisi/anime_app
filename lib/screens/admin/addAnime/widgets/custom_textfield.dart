@@ -7,6 +7,7 @@ Widget customTextField({
   maxlines = 10,
   keyboardtype = TextInputType.text,
   onchanged,
+  suffix,
 }) {
   return TextFormField(
     controller: controller,
@@ -15,6 +16,7 @@ Widget customTextField({
     style: const TextStyle(color: Colors.white),
     onChanged: onchanged,
     decoration: InputDecoration(
+      suffix: suffix,
       hintText: hint,
       hintStyle: const TextStyle(color: Colors.white),
       border: OutlineInputBorder(

@@ -1,9 +1,11 @@
+import 'package:anime_app/screens/admin/addAnime/add_charactor.dart';
 import 'package:anime_app/screens/admin/addAnime/add_moreinfo.dart';
 import 'package:anime_app/screens/admin/addAnime/widgets/anime_type_container.dart';
 import 'package:anime_app/screens/admin/addAnime/widgets/custom_textfield.dart';
 import 'package:anime_app/screens/admin/addAnime/widgets/status_container.dart';
 import 'package:anime_app/screens/admin/controller/admin_controller.dart';
 import 'package:anime_app/screens/admin/details/widgets/title_text.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:line_icons/line_icons.dart';
@@ -19,6 +21,14 @@ class AddAnime extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: const Text('Add Anime'),
+          actions: [
+            IconButton(
+              onPressed: () {
+                Get.to(() => const AddCharactor());
+              },
+              icon: const Icon(CupertinoIcons.add),
+            )
+          ],
         ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -148,6 +158,11 @@ class AddAnime extends StatelessWidget {
                 customTextField(
                   controller: controller.animeNameController,
                   hint: 'Enter Anime Name',
+                ),
+                10.heightBox,
+                customTextField(
+                  controller: controller.animeVideoController,
+                  hint: 'Enter Anime video URL',
                 ),
                 20.heightBox,
                 Obx(

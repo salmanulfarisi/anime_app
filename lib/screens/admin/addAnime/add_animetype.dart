@@ -1,4 +1,3 @@
-import 'package:anime_app/screens/admin/addAnime/add_anime.dart';
 import 'package:anime_app/screens/admin/addAnime/widgets/custom_textfield.dart';
 import 'package:anime_app/screens/admin/controller/admin_controller.dart';
 import 'package:anime_app/screens/admin/model/anime_model.dart';
@@ -95,8 +94,10 @@ class AddAnimeType extends StatelessWidget {
                     onPressed: () async {
                       await FireStoreServices.addAnimeDetails(
                         AnimeModel(
+                          charactors: controller.charactorList,
                           id: FireStoreServices.getNewDocumentId(),
                           animeName: controller.animeNameController.text,
+                          animeVideo: controller.animeVideoController.text,
                           animeImage: controller.imageList,
                           animeType: controller.isMovie.value == true
                               ? 'Movie'
@@ -159,7 +160,6 @@ class AddAnimeType extends StatelessWidget {
                       );
                       VxToast.show(context, msg: 'Anime Added Successfully');
                       controller.clearAllTextControllers();
-                      Get.offAll(() => const AddAnime());
                     },
                     child: 'Add Anime Type'.text.make(),
                   ),

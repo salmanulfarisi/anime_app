@@ -56,7 +56,7 @@ class TrendingAnime extends StatelessWidget {
                             Get.to(() => AnimeDetailsAdmin(data: data[index]));
                           },
                           child: animeContainer(
-                            animeEp: data[index]['totalEpisodes'],
+                            animeEp: data[index]['episodes']['totalEpisodes'],
                             animeImg: data[index]['animeImage'][0],
                             animename: data[index]['animeName'],
                             animeType: data[index]['animeType'],

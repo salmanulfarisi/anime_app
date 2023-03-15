@@ -1,3 +1,5 @@
+import 'package:anime_app/screens/admin/model/charactor_model.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -6,6 +8,7 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 class AdminController extends GetxController {
   var currentIndex = 0.obs;
   var currentImageIndex = 0.obs;
+  late QueryDocumentSnapshot? snapshotData;
 
   // key for form
   var formKey = GlobalKey<FormState>();
@@ -16,6 +19,7 @@ class AdminController extends GetxController {
   // list of map
   var producerList = <Map<String, String>>[].obs;
   var linkList = <Map<String, String>>[].obs;
+  List<Charactor> charactorList = <Charactor>[].obs;
 
   // bool
   var isAllFilled = false.obs;
@@ -26,6 +30,7 @@ class AdminController extends GetxController {
   var isAiring = false.obs;
   var isFinished = false.obs;
   var isNotyet = false.obs;
+  var isFoundedId = false.obs;
 
   late YoutubePlayerController youtubeController;
   var videoId = YoutubePlayer.convertUrlToId(
@@ -64,6 +69,7 @@ class AdminController extends GetxController {
   // main text controllers
   var animeImageController = TextEditingController();
   var animeNameController = TextEditingController();
+  var animeVideoController = TextEditingController();
   var animePopularityController = TextEditingController();
   var animeRankController = TextEditingController();
   var animeScoreController = TextEditingController();
@@ -90,6 +96,22 @@ class AdminController extends GetxController {
   // add anime type
   var trendingNoController = TextEditingController();
   var topAiredNoController = TextEditingController();
+
+  // charactor text field
+  var charIdController = TextEditingController();
+  var charNameController = TextEditingController();
+  var charImageController = TextEditingController();
+
+  // add charactor to charactorList
+  void addCharactor() {
+    if (charNameController.text.isNotEmpty &&
+        charImageController.text.isNotEmpty) {
+      charactorList.add(Charactor(
+          name: charNameController.text, image: charImageController.text));
+      charNameController.clear();
+      charImageController.clear();
+    }
+  }
 
   // all text controllers clear
   void clearAllTextControllers() {

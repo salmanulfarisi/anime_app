@@ -11,3 +11,6 @@ const characterCollection = 'charactor';
 
 // new collection
 const adminAnimeCollection = 'adminAnime';
+
+// new sub collection
+const adminCharacterCollection = 'adminCharacter';

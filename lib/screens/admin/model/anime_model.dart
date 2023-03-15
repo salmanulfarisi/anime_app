@@ -1,7 +1,11 @@
+import 'package:anime_app/screens/admin/model/charactor_model.dart';
+
 class AnimeModel {
   final String id;
   final String animeName;
+  final String animeVideo;
   final List<String> animeImage;
+  final List<Charactor> charactors;
   final String animeType;
   final String animeStatus;
   final double animeScore;
@@ -26,7 +30,9 @@ class AnimeModel {
 
   AnimeModel({
     required this.id,
+    required this.charactors,
     required this.animeName,
+    required this.animeVideo,
     required this.animeImage,
     required this.animeType,
     required this.animeStatus,
@@ -55,6 +61,7 @@ class AnimeModel {
     return {
       'id': id,
       'animeName': animeName,
+      'animeVideo': animeVideo,
       'animeImage': animeImage,
       'animeType': animeType,
       'animeStatus': animeStatus,
@@ -68,6 +75,7 @@ class AnimeModel {
       'animeStudio': animeStudio,
       'animeRating': animeRating,
       'animeLicensor': animeLicensor,
+      "charactors": charactors.map((e) => e.toMap()).toList(),
       'aired': aired.toMap(),
       'animeSynonyms': animeSynonyms,
       'producers': producers.map((e) => e).toList(),
