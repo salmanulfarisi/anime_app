@@ -1,3 +1,4 @@
+import 'package:anime_app/screens/admin/model/actor_model.dart';
 import 'package:anime_app/screens/admin/model/charactor_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +21,7 @@ class AdminController extends GetxController {
   var producerList = <Map<String, String>>[].obs;
   var linkList = <Map<String, String>>[].obs;
   List<Charactor> charactorList = <Charactor>[].obs;
+  List<Actor> actorList = <Actor>[].obs;
 
   // bool
   var isAllFilled = false.obs;
@@ -98,18 +100,40 @@ class AdminController extends GetxController {
   var topAiredNoController = TextEditingController();
 
   // charactor text field
-  var charIdController = TextEditingController();
+  var charRoleController = TextEditingController();
+  var charLinkController = TextEditingController();
   var charNameController = TextEditingController();
   var charImageController = TextEditingController();
+  // actor text field
+  var actorNameController = TextEditingController();
+  var actorImageController = TextEditingController();
+  var actorLinkController = TextEditingController();
 
   // add charactor to charactorList
   void addCharactor() {
     if (charNameController.text.isNotEmpty &&
         charImageController.text.isNotEmpty) {
       charactorList.add(Charactor(
-          name: charNameController.text, image: charImageController.text));
+          name: charNameController.text,
+          image: charImageController.text,
+          role: charRoleController.text,
+          link: charLinkController.text));
       charNameController.clear();
       charImageController.clear();
+    }
+  }
+
+  // add actor to actorList
+  void addActor() {
+    if (actorNameController.text.isNotEmpty &&
+        actorImageController.text.isNotEmpty) {
+      actorList.add(Actor(
+          name: actorNameController.text,
+          image: actorImageController.text,
+          link: actorLinkController.text));
+      actorNameController.clear();
+      actorImageController.clear();
+      actorLinkController.clear();
     }
   }
 

@@ -2,9 +2,7 @@ import 'dart:developer';
 
 import 'package:anime_app/screens/admin/addAnime/widgets/custom_textfield.dart';
 import 'package:anime_app/screens/admin/controller/admin_controller.dart';
-import 'package:anime_app/screens/admin/model/charactor_model.dart';
-import 'package:anime_app/services/firestore_services.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:anime_app/screens/admin/details/widgets/title_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -22,25 +20,15 @@ class _AddCharactorState extends State<AddCharactor> {
     final controller = Get.find<AdminController>();
     return Scaffold(
       appBar: AppBar(
-        title: "Add Charactor".text.white.make(),
+        title: "Charactor&Actor".text.white.make(),
       ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              customTextField(
-                  hint: 'anime Id',
-                  controller: controller.charIdController,
-                  suffix: controller.charIdController.text.isEmpty
-                      ? null
-                      : IconButton(
-                          onPressed: () async {
-                            await FireStoreServices.getAnimeNameById(
-                                context, controller.charIdController.text);
-                          },
-                          icon: const Icon(Icons.search, color: Colors.white),
-                        )),
+              titleText(title: 'Add Actor'),
               10.heightBox,
               customTextField(
                 hint: 'character Name',
@@ -51,48 +39,61 @@ class _AddCharactorState extends State<AddCharactor> {
                   hint: 'character Image',
                   controller: controller.charImageController),
               10.heightBox,
-              controller.charIdController.text.isEmpty
-                  ? GestureDetector(
-                      onTap: () {
-                        controller.addCharactor();
-                        log("${controller.charactorList[0].name}]}}");
-                      },
-                      child: Container(
-                        width: context.screenWidth,
-                        height: context.screenHeight * 0.05,
-                        decoration: BoxDecoration(
-                            color: Colors.blue,
-                            borderRadius: BorderRadius.circular(10)),
-                        child: 'Add Charactor'.text.white.makeCentered(),
-                      ),
-                    )
-                  : GestureDetector(
-                      onTap: () {
-                        FirebaseFirestore.instance
-                            .collection('adminAnime')
-                            .doc(controller.charIdController.text)
-                            .set({
-                          'charactorList': FieldValue.arrayUnion([
-                            Charactor(
-                                name: controller.charNameController.text,
-                                image: controller.charImageController.text)
-                          ])
-                        }, SetOptions(merge: true));
-                        log(controller.charactorList.toString());
-                      },
-                      child: Container(
-                        width: context.screenWidth,
-                        height: context.screenHeight * 0.05,
-                        decoration: BoxDecoration(
-                            color: Colors.blue,
-                            borderRadius: BorderRadius.circular(10)),
-                        child:
-                            'Add Charactor to ${controller.charIdController.text}'
-                                .text
-                                .white
-                                .makeCentered(),
-                      ),
-                    )
+              customTextField(
+                hint: 'Char Role',
+                controller: controller.charRoleController,
+              ),
+              10.heightBox,
+              customTextField(
+                hint: 'Char Link',
+                controller: controller.charLinkController,
+              ),
+              10.heightBox,
+              GestureDetector(
+                onTap: () {
+                  controller.addCharactor();
+                  log("${controller.charactorList[0].name}]}}");
+                },
+                child: Container(
+                  width: context.screenWidth,
+                  height: context.screenHeight * 0.05,
+                  decoration: BoxDecoration(
+                      color: Colors.blue,
+                      borderRadius: BorderRadius.circular(10)),
+                  child: 'Add Charactor'.text.white.makeCentered(),
+                ),
+              ),
+              20.heightBox,
+              titleText(title: 'Add Actor'),
+              10.heightBox,
+              customTextField(
+                hint: 'Actor Name',
+                controller: controller.actorNameController,
+              ),
+              10.heightBox,
+              customTextField(
+                  hint: 'Actor Image',
+                  controller: controller.actorImageController),
+              10.heightBox,
+              customTextField(
+                hint: 'Actor Link',
+                controller: controller.actorLinkController,
+              ),
+              10.heightBox,
+              GestureDetector(
+                onTap: () {
+                  controller.addActor();
+                  log("${controller.actorList[0].name}]}}");
+                },
+                child: Container(
+                  width: context.screenWidth,
+                  height: context.screenHeight * 0.05,
+                  decoration: BoxDecoration(
+                      color: Colors.blue,
+                      borderRadius: BorderRadius.circular(10)),
+                  child: 'Add Actor'.text.white.makeCentered(),
+                ),
+              )
             ],
           ),
         ),
